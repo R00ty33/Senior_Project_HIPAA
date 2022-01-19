@@ -7,6 +7,7 @@ import { Squash as Hamburger } from 'hamburger-react'
 
 function Navbar() {
     const [navSize, changeNavSize] = useState("large")
+    const [isOpen, setOpen] = useState(true)
 
     const getActiveSideBar = () => {
         if (window.location.pathname == "/Home") {
@@ -44,7 +45,7 @@ function Navbar() {
     return (
         <Flex pos="sticky" left="5" h="95vh" marginTop="2.5vh" boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)" borderRadius={navSize == "small" ? "15px" : "30px"} w={navSize == "small" ? "75px" : "200px"} flexDir="column" justifyContent="space-between">
             <Flex p="5%" flexDir="column" w="100%" alignItems={navSize == "small" ? "center" : "flex-start"} as="nav">
-                <IconButton outline="none" border="none" textDecoration="none" background="none" mt={5} _hover={{ background: 'none' }} icon={<Hamburger size={30} />} 
+                <IconButton outline="none" border="none" textDecoration="none" background="none" mt={5} _hover={{ background: 'none' }} icon={<Hamburger size={30} toggled={isOpen} toggle={setOpen} />} 
                     onClick={() => {
                         if (navSize == "small")
                             changeNavSize("large")

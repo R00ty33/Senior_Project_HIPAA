@@ -6,7 +6,9 @@ function Home() {
     return (
         <Flex width="100%">
             <Navbar/>
-            <Heading display="center" align="center" textAlign="center">Hungry Hungry HIPAAS</Heading>
+            <Flex ml={40}>
+                <Heading display="center" align="center" color="#1E90FF" textAlign="center">Hungry Hungry HIPAAS</Heading>
+            </Flex>
         </Flex>
     )
 }
