@@ -10,17 +10,17 @@ import java.util.List;
 
 @Configuration
 public class InventoryConfig {
-//    @Bean
-//    CommandLineRunner commandLineRunner(InventoryRepository inventoryRepository) {
-//        return args -> {
-//            Inventory test = new Inventory(
-//                "test",
-//                "test",
-//                "test",
-//                9.99,
-//                2
-//            );
-//            inventoryRepository.saveAll(List.of(test));
-//        };
-//    }
+    @Bean
+    CommandLineRunner commandLineRunner(InventoryRepository inventoryRepository) {
+        return args -> {
+            Inventory test = new Inventory(
+                "Ibuprofen",
+                "Nonsteroidal anti-inflammatory drug to treat fever and mild to severe pain",
+                "https://www.cvs.com/bizcontent/merchandising/productimages/large/50428431986.jpg",
+                8.99,
+                10
+            );
+            inventoryRepository.saveAll(List.of(test));
+        };
+    }
 }
