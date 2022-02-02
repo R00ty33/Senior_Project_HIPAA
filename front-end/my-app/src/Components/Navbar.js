@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {Flex, Text, Stack, IconButton, Divider, Avatar, Heading, Button, Center } from '@chakra-ui/react'
+import {ChakraProvider, Flex, Text, Stack, IconButton, Divider, Avatar, Heading, Button, Center } from '@chakra-ui/react'
 import { FiBriefcase, FiLogIn, FiHome, FiMenu } from 'react-icons/fi'
 import {FaBriefcaseMedical, FaClinicMedical, FaFileMedical} from 'react-icons/fa'
 import NavItem from "./NavItem"
@@ -10,7 +10,7 @@ function Navbar() {
     const [isOpen, setOpen] = useState(true)
 
     const getActiveSideBar = () => {
-        if (window.location.pathname == "/Home") {
+        if (window.location.pathname == "/Home" || window.location.pathname == '/') {
             return (
                 <div>
                     <NavItem url="/Dashboard" navSize={navSize} icon={FaClinicMedical} title="Dashboard" active/>
@@ -43,6 +43,7 @@ function Navbar() {
     }
 
     return (
+        <ChakraProvider>
         <Flex pos="sticky" left="5" h="95vh" marginTop="2.5vh" boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)" borderRadius={navSize == "small" ? "15px" : "30px"} w={navSize == "small" ? "75px" : "200px"} flexDir="column" justifyContent="space-between">
             <Flex p="5%" flexDir="column" w="100%" alignItems={navSize == "small" ? "center" : "flex-start"} as="nav">
                 <IconButton outline="none" border="none" textDecoration="none" background="none" mt={5} _hover={{ background: 'none' }} icon={<Hamburger size={30} toggled={isOpen} toggle={setOpen} />} 
@@ -66,6 +67,7 @@ function Navbar() {
             </Flex>
             </Flex>
         </Flex>
+        </ChakraProvider>
     )
 }
 
