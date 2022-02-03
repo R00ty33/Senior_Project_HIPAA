@@ -20,7 +20,7 @@ function LoginPage() {
     /** If logged in, go to Dashboard */
     function handleLogged() {
         if (authProvider.useAuth()) {
-            history('/Dashboard');
+            history('/Home');
         }
     }
 
@@ -46,7 +46,7 @@ function LoginPage() {
                 tokenProvider.setTokens(access_token, refresh_token);
                 console.log(tokenProvider.getAccessToken());
                 console.log("Logged in: " + tokenProvider.isLoggedIn())
-                return history('/Dashboard');
+                return history('/Home');
             }
         }).catch((err) => {
             console.log("Promise Rejected", err.message, err.response.data);
