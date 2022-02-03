@@ -2,12 +2,15 @@ package com.HIPAA.SeniorProject.Model;
 
 import javax.persistence.*;
 
+import static javax.persistence.GenerationType.AUTO;
+
 @Entity
 @Table(name = "inventory")
 public class Inventory {
 
     @Id
-    private int id;
+    @GeneratedValue(strategy = AUTO)
+    private Long id;
     private String product_name;
     private String product_description;
     private String product_image;

@@ -23,7 +23,7 @@ function SignUpPage() {
         validatePassword(password);
         if (validateEmail(email)) {
             if (validatePassword(password)) {
-                Axios.post('http://localhost:8080/api/signup', {
+                Axios.post('http://localhost:8080/api/SignUp', {
                     firstName: firstName,
                     lastName: lastName,
                     email: email,

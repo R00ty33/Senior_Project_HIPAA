@@ -13,14 +13,14 @@ public class InventoryConfig {
     @Bean
     CommandLineRunner commandLineRunner(InventoryRepository inventoryRepository) {
         return args -> {
-            Inventory test = new Inventory(
+            Inventory items = new Inventory(
                 "Ibuprofen",
                 "Nonsteroidal anti-inflammatory drug to treat fever and mild to severe pain",
                 "https://www.cvs.com/bizcontent/merchandising/productimages/large/50428431986.jpg",
                 8.99,
                 10
             );
-            inventoryRepository.saveAll(List.of(test));
+            inventoryRepository.saveAll(List.of(items));
         };
     }
 }
