@@ -10,13 +10,10 @@ import com.HIPAA.SeniorProject.Repository.UserCredentialsRepository;
 import com.HIPAA.SeniorProject.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
@@ -24,7 +21,6 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 @Service @Transactional @Slf4j @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
@@ -61,8 +57,9 @@ public class UserService implements UserDetailsService {
         else {
             Role role = new Role();
             role.setName("ROLE_USER");
-            User newUser = new User(signUpObject.getFirst_name(), signUpObject.getLast_name(), signUpObject.getEmail(), new Date());
+            User newUser = new User(signUpObject.getFirstName(), signUpObject.getLastName(), signUpObject.getEmail(), new Date());
             newUser.setRoles(role);
+            System.out.println(signUpObject.getFirstName());
             UserCredentials newUserCredentials = new UserCredentials(signUpObject.getPassword(), newUser);
             saveUserCredentials(newUserCredentials);
             log.info("New user successfully added to the DB");
