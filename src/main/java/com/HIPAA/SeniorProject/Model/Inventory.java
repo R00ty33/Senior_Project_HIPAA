@@ -14,16 +14,19 @@ public class Inventory {
     private String product_name;
     private String product_description;
     private String product_image;
+    private String category;
     private Double price;
     private Integer quantity;
 
     public Inventory() {
 
     }
-    public Inventory(String product_name, String product_description, String product_image, Double price, Integer quantity) {
+
+    public Inventory(String product_name, String product_description, String product_image, String category, Double price, Integer quantity) {
         this.product_name = product_name;
         this.product_description = product_description;
         this.product_image = product_image;
+        this.category = category;
         this.price = price;
         this.quantity = quantity;
     }
@@ -68,12 +71,30 @@ public class Inventory {
         this.quantity = quantity;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
         return "Inventory{" +
-                "product_name='" + product_name + '\'' +
+                "id=" + id +
+                ", product_name='" + product_name + '\'' +
                 ", product_description='" + product_description + '\'' +
                 ", product_image='" + product_image + '\'' +
+                ", category='" + category + '\'' +
                 ", price=" + price +
                 ", quantity=" + quantity +
                 '}';
