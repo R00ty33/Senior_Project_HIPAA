@@ -17,7 +17,7 @@ public class InventoryController {
         this.inventoryService = inventoryService;
     }
 
-    @GetMapping("/getInventory/v1")
+    @GetMapping("/getAllItems/v1")
     public Object[] getInventory() {
         System.out.println("called");
         return new Object[]{inventoryService.getInventory()};

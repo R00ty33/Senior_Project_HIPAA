@@ -79,7 +79,7 @@ public class InventoryConfig {
                 10
         );
             Inventory Tums = new Inventory(
-                "Tylenol",
+                "Tums",
                 " ",
                 " ",
                 "Acid Reflux",
@@ -87,7 +87,7 @@ public class InventoryConfig {
                 10
             );
             Inventory Zantac = new Inventory(
-                "Tylenol",
+                "Zantac",
                 " ",
                 " ",
                 "Acid Reflux",
@@ -215,9 +215,9 @@ public class InventoryConfig {
                 10
             );
             inventoryRepository.saveAll(List.of(Acetaminophen, Advil, Alavert, Allegra, Claritin, Elderberry, Fish_Oil, Ibuprofen,
-                                                Melatonin, Motrin, Mucinex, Multi_Complete, Nasal_Decongestant_PE, Orajel, Prilosec,
-                                                Rolaids, Sinus_Congestion_Relief, Sudafed, Tagamet, Tums, Tylenol, Xyzal, Zantac, Zinc, Zyrtec
-                    ));
+                    Melatonin, Motrin, Mucinex, Multi_Complete, Nasal_Decongestant_PE, Orajel, Prilosec,
+                    Rolaids, Sinus_Congestion_Relief, Sudafed, Tagamet, Tums, Tylenol, Xyzal, Zantac, Zinc, Zyrtec
+            ));
 
         };
     }

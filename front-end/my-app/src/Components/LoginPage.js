@@ -30,12 +30,7 @@ function LoginPage() {
         params.append('email', email);
         params.append('password', password);
 
-        const config = {
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }
-        Axios.post('http://localhost:8080/api/login', params, config).then((response) => {
+        Axios.post('http://localhost:8080/api/login', params, {withCredentials: true, crossorigin: true, origin: "http://localhost:3000"}).then((response) => {
             console.log(response.status, response, response.data);
             if (response.data.message === 'Unauthorized') {
                 setIncorrectPasswordAlert(true);

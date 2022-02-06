@@ -4,8 +4,14 @@ import { BrowserRouter, Routes, Router, Route } from 'react-router-dom';
 import HomePage from "./Components/HomePage.js";
 import LoginPage from "./Components/LoginPage.js";
 import SignUpPage from "./Components/SignUpPage.js";
+import EcommerceCookieProvider from "./Components/EcommerceCookieProvider.js";
+import { useCookies, Cookies } from 'react-cookie';
 
 function App() {
+  const [cookies, setCookie] = useCookies();
+
+  EcommerceCookieProvider.getEcommerceCookie();
+
   return (
     <BrowserRouter>
       <Routes>
