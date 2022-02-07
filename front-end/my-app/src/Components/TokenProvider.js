@@ -1,19 +1,21 @@
 import React from 'react';
 import jwt from 'jwt-decode';
+import CookieProvider from './CookieProvider';
 
 const TokenProvider = {
-    setTokens: function(access_token, refresh_token) {
-        localStorage.setItem("ACCESS_TOKEN", access_token);
-        localStorage.setItem("REFRESH_TOKEN", refresh_token);
-    },
+    //setTokens: function(access_token, refresh_token) {
+        //localStorage.setItem("ACCESS_TOKEN", access_token);
+        //localStorage.setItem("REFRESH_TOKEN", refresh_token);
+    //},
 
     getAccessToken: function() {
-        return localStorage.getItem("ACCESS_TOKEN");
+        return CookieProvider.getCookie("JWTCookie")
+        //return localStorage.getItem("ACCESS_TOKEN");
     },
 
-    getRefreshToken: function() {
-        return localStorage.getItem("REFRESH_TOKEN");
-    },
+    //getRefreshToken: function() {
+        //return localStorage.getItem("REFRESH_TOKEN");
+    //},
 
     getExpirationDate: function(jwtToken) {
         if (jwtToken === null || jwtToken === 'null') {
@@ -39,11 +41,11 @@ const TokenProvider = {
     },
 
     getToken: async function() {
-        if (!localStorage.getItem("ACCESS_TOKEN")) {
+        if (CookieProvider.getCookie("JWTCookie") == null) {
             return null;
         }
         
-        if (isExpired(getExpirationDate(localStorage.getItem("ACCESS_TOKEN")))) {
+        if (isExpired(getExpirationDate(CookieProvider.getCookie("JWTCookie")))) {
             /*
             const updatedToken = await fetch('/update-token', {
                 method: 'POST',
@@ -56,18 +58,19 @@ const TokenProvider = {
             // setTokens(updatedToken, updatedRefreshToken);
         }
 
-        return localStorage.getItem("ACCESS_TOKEN");
+        return CookieProvider.getCookie("JWTCookie")
     },
 
     getEmail: function() {
-        let token = localStorage.getItem("ACCESS_TOKEN");
+        let token = CookieProvider.getCookie("JWTCookie");
         let decoded = jwt(token);
         return decoded.sub;
     },
 
     isLoggedIn: function() { 
         // if (localStorage.getItem("ACCESS_TOKEN")) return false;
-        if ((isExpired(getExpirationDate(localStorage.getItem("ACCESS_TOKEN"))))) {
+        console.log("Is logged in :" + isExpired(getExpirationDate(CookieProvider.getCookie("JWTCookie"))))
+        if ((isExpired(getExpirationDate(CookieProvider.getCookie("JWTCookie"))))) {
             return false;
         }
         else {

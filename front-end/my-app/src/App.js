@@ -1,26 +1,28 @@
 import React, { useState, useEffect } from "react"
-import { BrowserRouter, Routes, Router, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Router, Route} from 'react-router-dom';
 
 import HomePage from "./Components/HomePage.js";
 import LoginPage from "./Components/LoginPage.js";
 import SignUpPage from "./Components/SignUpPage.js";
-import EcommerceCookieProvider from "./Components/EcommerceCookieProvider.js";
-import { useCookies, Cookies } from 'react-cookie';
+import CookieProvider from "./Components/CookieProvider.js";
+import { ChakraProvider } from '@chakra-ui/react';
+import PrivateRoute from './Components/PrivateRoute';
 
 function App() {
-  const [cookies, setCookie] = useCookies();
 
-  EcommerceCookieProvider.getEcommerceCookie();
+  CookieProvider.getEcommerceCookie();
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route exact path='/Home' element={<HomePage/>} />
-        <Route exact path='/Login' element={<LoginPage/>} />
-        <Route exact path='/SignUp' element={<SignUpPage/>} />
-        <Route path='/' element={<HomePage/>} />
-      </Routes>
-    </BrowserRouter>
+    <ChakraProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route exact path='/Home' element={<HomePage/>} />
+          <Route exact path='/Login' element={<LoginPage/>} />
+          <Route exact path='/SignUp' element={<SignUpPage/>} />
+          <Route path='/' element={<HomePage/>} />
+        </Routes>
+      </BrowserRouter>
+    </ChakraProvider>
   )
 }
 

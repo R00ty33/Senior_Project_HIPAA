@@ -4,10 +4,12 @@ import { FiBriefcase, FiLogIn, FiHome, FiMenu } from 'react-icons/fi'
 import {FaBriefcaseMedical, FaClinicMedical, FaFileMedical} from 'react-icons/fa'
 import NavItem from "./NavItem"
 import { Squash as Hamburger } from 'hamburger-react'
+import AuthProvider from './AuthProvider'
 
 function Navbar() {
     const [navSize, changeNavSize] = useState("large")
     const [isOpen, setOpen] = useState(true)
+    const [isLoggedIn, setLoggedIn] = useState(AuthProvider.useAuth())
 
     const getActiveSideBar = () => {
         if (window.location.pathname == "/Home" || window.location.pathname == '/') {
@@ -60,7 +62,13 @@ function Navbar() {
                 <Flex mt={4} align="center" pos="absolute" bottom="0">
                     <Flex flexDir="column" ml={4}>
                         <Heading as="h3" size="sm">
-                            <NavItem url="/Login" navSize={navSize} icon={FiLogIn} title="Login" />
+                            <NavItem url={"/Home"} 
+                                onClick={() => {
+                                    if(isLoggedIn) 
+                                        console.log() 
+                                    else 
+                                        console.log("t")
+                                }} navSize={navSize} icon={FiLogIn} title={AuthProvider.useAuth() ? "Login" : "Logout"} />
                         </Heading>
                     </Flex>
                 </Flex>

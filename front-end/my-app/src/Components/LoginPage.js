@@ -36,11 +36,11 @@ function LoginPage() {
                 setIncorrectPasswordAlert(true);
             }
             else {
-                let access_token = response.data.access_token;
-                let refresh_token = response.data.refresh_token;
-                tokenProvider.setTokens(access_token, refresh_token);
-                console.log(tokenProvider.getAccessToken());
-                console.log("Logged in: " + tokenProvider.isLoggedIn())
+                //let access_token = response.data.access_token;
+                //let refresh_token = response.data.refresh_token;
+                //tokenProvider.setTokens(access_token, refresh_token);
+                //console.log(tokenProvider.getAccessToken());
+                //console.log("Logged in: " + tokenProvider.isLoggedIn())
                 return history('/Home');
             }
         }).catch((err) => {
