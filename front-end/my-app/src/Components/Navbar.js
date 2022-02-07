@@ -13,7 +13,7 @@ function Navbar() {
         if (window.location.pathname == "/Home" || window.location.pathname == '/') {
             return (
                 <div>
-                    <NavItem url="/Dashboard" navSize={navSize} icon={FaClinicMedical} title="Dashboard" active/>
+                    <NavItem url="/Home" navSize={navSize} icon={FaClinicMedical} title="Home" active/>
                     <NavItem url="/Invetory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" />
                     <NavItem url="/HIPAA" navSize={navSize} icon={FaFileMedical} title="HIPAA" />
 
@@ -23,7 +23,7 @@ function Navbar() {
         if (window.location.pathname == "/Inventory") {
             return (
                 <div>
-                    <NavItem url="/Dashboard" navSize={navSize} icon={FaClinicMedical} title="Dashboard" />
+                    <NavItem url="/Home" navSize={navSize} icon={FaClinicMedical} title="Home" />
                     <NavItem url="/Invetory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" active/>
                     <NavItem url="/HIPAA" navSize={navSize} icon={FaFileMedical} title="HIPAA" />
                     
@@ -33,7 +33,7 @@ function Navbar() {
         if (window.location.pathname == "/HIPAA") {
             return (
                 <div>
-                    <NavItem url="/Dashboard" navSize={navSize} icon={FaClinicMedical} title="Dashboard" />
+                    <NavItem url="/Home" navSize={navSize} icon={FaClinicMedical} title="Home" />
                     <NavItem url="/Invetory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" />
                     <NavItem url="/HIPAA" navSize={navSize} icon={FaFileMedical} title="HIPAA" active/>
 

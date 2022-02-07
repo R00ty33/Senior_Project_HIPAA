@@ -2,6 +2,9 @@ package com.HIPAA.SeniorProject.Model;
 
 import javax.persistence.*;
 
+import java.util.List;
+import java.util.Set;
+
 import static javax.persistence.GenerationType.AUTO;
 
 @Entity
@@ -11,12 +14,20 @@ public class Inventory {
     @Id
     @GeneratedValue(strategy = AUTO)
     private Long id;
+    @Column(name = "product_name")
     private String product_name;
     private String product_description;
     private String product_image;
     private String category;
     private Double price;
     private Integer quantity;
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "inventory")
+    private Set<Cart> cart;
 
     public Inventory() {
 
@@ -85,6 +96,14 @@ public class Inventory {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public Set<Cart> getCart() {
+        return cart;
+    }
+
+    public void setCart(Set<Cart> cart) {
+        this.cart = cart;
     }
 
     @Override

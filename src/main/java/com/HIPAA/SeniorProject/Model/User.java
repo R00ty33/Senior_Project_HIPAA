@@ -20,6 +20,9 @@ public class User {
     private String last_name;
     private String email;
     private Date date_joined;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="cart_cookie")
+    private Cart cookie;
     private int age;
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="role_name")
@@ -71,9 +74,21 @@ public class User {
 
     public void setAge(int age) {this.age = age;}
 
-    public Role getRoles() {return role;}
+    public Cart getCookie() {
+        return cookie;
+    }
 
-    public void setRoles(Role roles) {this.role = roles;}
+    public void setCookie(Cart cookie) {
+        this.cookie = cookie;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     @Override
     public String toString() {
@@ -82,8 +97,9 @@ public class User {
                 ", last_name='" + last_name + '\'' +
                 ", email='" + email + '\'' +
                 ", date_joined=" + date_joined +
+                ", cookie='" + cookie + '\'' +
                 ", age=" + age +
-                ", roles=" + role +
+                ", role=" + role +
                 '}';
     }
 }

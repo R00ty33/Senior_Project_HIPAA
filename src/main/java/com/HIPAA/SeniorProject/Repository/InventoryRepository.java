@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface InventoryRepository extends JpaRepository<Inventory, Integer>{
+public interface InventoryRepository extends JpaRepository<Inventory, Long>{
     @Query("SELECT s FROM Inventory s WHERE s.product_name = ?1")
     Inventory findByProductName(String product_name);
 }

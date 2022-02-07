@@ -20,4 +20,8 @@ public class InventoryService {
         log.info("Getting all InventoryItems");
         return inventoryRepository.findAll();
     }
+
+    public Inventory getProductByName(String product_name) {
+        return inventoryRepository.findByProductName(product_name);
+    }
 }

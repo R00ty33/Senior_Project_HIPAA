@@ -43,7 +43,7 @@ public class UserService implements UserDetailsService {
         }
 
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(user.getRoles().getName()));
+        authorities.add(new SimpleGrantedAuthority(user.getRole().getName()));
 
         return new org.springframework.security.core.userdetails.User(user.getEmail(), userCredentialsRepository.findUsersPassword(user.getEmail()), authorities);
     }
@@ -59,7 +59,7 @@ public class UserService implements UserDetailsService {
             Role role = new Role();
             role.setName("ROLE_USER");
             User newUser = new User(signUpObject.getFirstName(), signUpObject.getLastName(), signUpObject.getEmail(), new Date());
-            newUser.setRoles(role);
+            newUser.setRole(role);
             System.out.println(signUpObject.getFirstName());
             UserCredentials newUserCredentials = new UserCredentials(signUpObject.getPassword(), newUser);
             saveUserCredentials(newUserCredentials);
@@ -76,6 +76,6 @@ public class UserService implements UserDetailsService {
         User user = userRepository.findUserByEmail(email);
         Role role = new Role();
         role.setName(roleName);
-        user.setRoles(role);
+        user.setRole(role);
     }
 }

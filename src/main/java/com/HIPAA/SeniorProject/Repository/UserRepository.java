@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 /** Extending from the JpaRepository implements methods for our data repository */
 /** Encapsulates storage, retrieval, and search behavior */
 @Repository /** responsible for data access */
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Long> {
     User findByEmail(String email);
 
     Role getRolesByEmail(String email);
