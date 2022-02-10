@@ -215,8 +215,8 @@ public class InventoryConfig {
                 6.49,
                 15
             );
-            inventoryRepository.saveAll(List.of(Acetaminophen, Advil, Alavert, Allegra, Claritin, Elderberry, Fish_Oil, Ibuprofen,
-                    Melatonin, Motrin, Mucinex, Multi_Complete, Nasal_Decongestant_PE, Orajel, Prilosec,
+            inventoryRepository.saveAll(List.of(Eight_Hour_Arthritis_Pain, Midol_Liquid_Gels, Motrin_IB_Migraine, Alavert, Allegra, Claritin,
+                    Melatonin, Advil_Sinus_Congestion_and_Pain, MucinexDM, Elderberry_Gummies, Omega_Three, Multi_Complete, Nasal_Decongestant_PE, Orajel, Prilosec,
                     Rolaids, Sinus_Congestion_Relief, Sudafed, Tagamet, Tums, Tylenol, Xyzal, Zantac, Zinc, Zyrtec
             ));
 
