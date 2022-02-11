@@ -68,7 +68,7 @@ function Navbar() {
                                         console.log() 
                                     else 
                                         console.log("t")
-                                }} navSize={navSize} icon={FiLogIn} title={AuthProvider.useAuth() ? "Login" : "Logout"} />
+                                }} navSize={navSize} icon={FiLogIn} title={AuthProvider.useAuth() ? "Logout" : "Login"} />
                         </Heading>
                     </Flex>
                 </Flex>
