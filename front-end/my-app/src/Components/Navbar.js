@@ -16,7 +16,7 @@ function Navbar() {
             return (
                 <div>
                     <NavItem url="/Home" navSize={navSize} icon={FaClinicMedical} title="Home" active/>
-                    <NavItem url="/Invetory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" />
+                    <NavItem url="/Inventory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" />
                     <NavItem url="/HIPAA" navSize={navSize} icon={FaFileMedical} title="HIPAA" />
 
                 </div>
@@ -26,7 +26,7 @@ function Navbar() {
             return (
                 <div>
                     <NavItem url="/Home" navSize={navSize} icon={FaClinicMedical} title="Home" />
-                    <NavItem url="/Invetory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" active/>
+                    <NavItem url="/Inventory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" active/>
                     <NavItem url="/HIPAA" navSize={navSize} icon={FaFileMedical} title="HIPAA" />
                     
                 </div>
@@ -36,7 +36,7 @@ function Navbar() {
             return (
                 <div>
                     <NavItem url="/Home" navSize={navSize} icon={FaClinicMedical} title="Home" />
-                    <NavItem url="/Invetory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" />
+                    <NavItem url="/Inventory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" />
                     <NavItem url="/HIPAA" navSize={navSize} icon={FaFileMedical} title="HIPAA" active/>
 
                 </div>

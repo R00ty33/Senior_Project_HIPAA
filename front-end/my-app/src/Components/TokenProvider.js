@@ -69,11 +69,12 @@ const TokenProvider = {
 
     isLoggedIn: function() { 
         // if (localStorage.getItem("ACCESS_TOKEN")) return false;
-        console.log("Is logged in :" + isExpired(getExpirationDate(CookieProvider.getCookie("JWTCookie"))))
         if ((isExpired(getExpirationDate(CookieProvider.getCookie("JWTCookie"))))) {
+            console.log("Is logged in: false")
             return false;
         }
         else {
+            console.log("Is logged in: true" + CookieProvider.getCookie("JWTCookie"))
             return true;
         }
     }

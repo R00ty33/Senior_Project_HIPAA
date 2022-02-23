@@ -1,5 +1,7 @@
 package com.HIPAA.SeniorProject.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 import java.util.List;
@@ -9,6 +11,7 @@ import static javax.persistence.GenerationType.AUTO;
 
 @Entity
 @Table(name = "inventory")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "cart"}) /** Stops infinite recursion */
 public class Inventory {
 
     @Id

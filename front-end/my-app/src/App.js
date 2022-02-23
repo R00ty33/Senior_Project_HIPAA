@@ -6,6 +6,7 @@ import LoginPage from "./Components/LoginPage.js";
 import SignUpPage from "./Components/SignUpPage.js";
 import CookieProvider from "./Components/CookieProvider.js";
 import { ChakraProvider } from '@chakra-ui/react';
+import InventoryPage from "./Components/Inventory";
 import PrivateRoute from './Components/PrivateRoute';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route exact path='/Home' element={<HomePage/>} />
           <Route exact path='/Login' element={<LoginPage/>} />
           <Route exact path='/SignUp' element={<SignUpPage/>} />
+          <Route exact path='/Inventory' element={<InventoryPage/>} />
           <Route path='/' element={<HomePage/>} />
         </Routes>
       </BrowserRouter>
