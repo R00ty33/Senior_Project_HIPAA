@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {ChakraProvider, Flex, Text, Stack, IconButton, Divider, Avatar, Heading, Button, Center } from '@chakra-ui/react'
 import { FiBriefcase, FiLogIn, FiHome, FiMenu } from 'react-icons/fi'
-import {FaBriefcaseMedical, FaClinicMedical, FaFileMedical} from 'react-icons/fa'
+import {FaBriefcaseMedical, FaClinicMedical, FaFileMedical, FaShoppingCart} from 'react-icons/fa'
 import NavItem from "./NavItem"
 import { Squash as Hamburger } from 'hamburger-react'
 import AuthProvider from './AuthProvider'
@@ -18,7 +18,7 @@ function Navbar() {
                     <NavItem url="/Home" navSize={navSize} icon={FaClinicMedical} title="Home" active/>
                     <NavItem url="/Inventory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" />
                     <NavItem url="/HIPAA" navSize={navSize} icon={FaFileMedical} title="HIPAA" />
-
+                    <NavItem url="/Cart" navSize={navSize} icon={FaShoppingCart} title="Cart" />
                 </div>
             )
         }
@@ -28,7 +28,7 @@ function Navbar() {
                     <NavItem url="/Home" navSize={navSize} icon={FaClinicMedical} title="Home" />
                     <NavItem url="/Inventory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" active/>
                     <NavItem url="/HIPAA" navSize={navSize} icon={FaFileMedical} title="HIPAA" />
-                    
+                    <NavItem url="/Cart" navSize={navSize} icon={FaShoppingCart} title="Cart" />
                 </div>
             )
         }
@@ -38,7 +38,17 @@ function Navbar() {
                     <NavItem url="/Home" navSize={navSize} icon={FaClinicMedical} title="Home" />
                     <NavItem url="/Inventory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" />
                     <NavItem url="/HIPAA" navSize={navSize} icon={FaFileMedical} title="HIPAA" active/>
-
+                    <NavItem url="/Cart" navSize={navSize} icon={FaShoppingCart} title="Cart" />
+                </div>
+            )
+        }
+        if (window.location.pathname == "/Cart") {
+            return (
+                <div>
+                    <NavItem url="/Home" navSize={navSize} icon={FaClinicMedical} title="Home" />
+                    <NavItem url="/Inventory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" />
+                    <NavItem url="/HIPAA" navSize={navSize} icon={FaFileMedical} title="HIPAA" active/>
+                    <NavItem url="/Cart" navSize={navSize} icon={FaShoppingCart} title="Cart" />
                 </div>
             )
         }

@@ -22,10 +22,10 @@ export default function NavItem({ icon, title, active, navSize, url}) {
                 <Link
                     p={5}
                     href={url}
-                    borderRadius={8}
+                    borderRadius={15}
                     textDecor="none"
                     _hover={{ textDecor: 'none', backgroundColor: "#F0F8FF"}}
-                    w={navSize == "large" && "100%"}
+                    w={navSize == "large" && "93%"}
                 >
                 
                     <MenuButton w="100%" outline="none" background="none" border="none" textDecoration="none">
