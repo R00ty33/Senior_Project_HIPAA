@@ -67,6 +67,11 @@ const TokenProvider = {
         return decoded.sub;
     },
 
+    getUserName: function () {
+        let decoded = getEmail()
+        return decoded.substring(0, decoded.indexOf('@'))
+    },
+
     isLoggedIn: function() { 
         // if (localStorage.getItem("ACCESS_TOKEN")) return false;
         if ((isExpired(getExpirationDate(CookieProvider.getCookie("JWTCookie"))))) {
@@ -98,6 +103,11 @@ function getExpirationDate(jwtToken) {
     return jwt && jwt.exp && jwt.exp * 1000;
 }
 
+function getEmail() {
+    let token = CookieProvider.getCookie("JWTCookie");
+    let decoded = jwt(token);
+    return decoded.sub;
+}
 
 function isExpired (expirationDate) {
     if (expirationDate === null || expirationDate === 'null') {

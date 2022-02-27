@@ -17,4 +17,6 @@ public class HipaaApplication {
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+	/** BCrypt will internally generate a random salt.
+	 * It will store the salt inside the hash value itself (The first 22 characters decode to a 16-byte value for the salt.) */
 }

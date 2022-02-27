@@ -28,6 +28,10 @@ const CookieProvider = {
         else {
             console.log("Already have cookie: " + document.cookie);
         }
+    },
+
+    deleteCookie: function(name) {
+        document.cookie = name+'=; Max-Age=-9999999999,';
     }
 
 }

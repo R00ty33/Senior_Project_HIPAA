@@ -19,11 +19,11 @@ public class User {
     private String first_name;
     private String last_name;
     private String email;
+    private String address;
     private Date date_joined;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="cart_cookie")
     private Cart cookie;
-    private int age;
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="role_name")
     private Role role;
@@ -37,20 +37,22 @@ public class User {
         this.email = email;
         this.date_joined = date_joined;
     }
-    public User(String first_name, String last_name, String email, Date date_joined, int age) {
+
+    public User(String first_name, String last_name, String email, Date date_joined, Role role) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
         this.date_joined = date_joined;
-        this.age = age;
+        this.role = role;
     }
 
-    public User(String first_name, String last_name, String email, Date date_joined, int age, Role role) {
+    public User(Long id, String first_name, String last_name, String email, String address, Date date_joined, Role role) {
+        this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
+        this.address = address;
         this.date_joined = date_joined;
-        this.age = age;
         this.role = role;
     }
 
@@ -70,9 +72,6 @@ public class User {
 
     public void setDate_joined(Date date_joined) {this.date_joined = date_joined;}
 
-    public int getAge() {return age;}
-
-    public void setAge(int age) {this.age = age;}
 
     public Cart getCookie() {
         return cookie;
@@ -90,15 +89,32 @@ public class User {
         this.role = role;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "first_name='" + first_name + '\'' +
+                "id=" + id +
+                ", first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +
                 ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
                 ", date_joined=" + date_joined +
-                ", cookie='" + cookie + '\'' +
-                ", age=" + age +
+                ", cookie=" + cookie +
                 ", role=" + role +
                 '}';
     }

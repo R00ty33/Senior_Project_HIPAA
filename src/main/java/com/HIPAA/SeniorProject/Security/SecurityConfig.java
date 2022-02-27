@@ -27,7 +27,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService; /* provided by spring security */
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
+    /** BCrypt will internally generate a random salt.
+     * It will store the salt inside the hash value itself (The first 22 characters decode to a 16-byte value for the salt.) */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
