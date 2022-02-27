@@ -28,7 +28,7 @@ function Inventory() {
             let name = data[i].product_name
             let description = data[i].product_description
             formattedData.push(
-                <Box w='93%' p={4} ml={3} borderWidth='1px' borderRadius='1g' mr={3}>
+                <Box w='93%' p={4} ml={2} borderWidth='1px' borderRadius='45px' mr={2} backgroundColor="linkedin.100">
                     <Heading as='h4' size='md'>{name}</Heading>
                     <Image boxSize='200px' src={image} mt={2} mb={2} borderRadius='15px'/>
                     <Box>
@@ -49,7 +49,7 @@ function Inventory() {
         }
         console.log("finsihed")
         return (
-            <SimpleGrid columns={2} spacing={10}>
+            <SimpleGrid columns={3} spacing={10}>
                 {formattedData}
             </SimpleGrid>
         )
@@ -59,7 +59,7 @@ function Inventory() {
         <ChakraProvider>
             <Flex width="100%">
                 <Navbar/>
-                <Flex height="100vh" mt={6} ml={10}>
+                <Flex height="auto" mt={6} ml={10}>
                     {items}
                 </Flex>
             </Flex>
