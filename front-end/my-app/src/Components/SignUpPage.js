@@ -152,17 +152,17 @@ function SignUpPage() {
 
     return (
         <ChakraProvider>
-        <Flex height="100vh" alignItems="center" justifyContent="center">
-            <Flex direction="column" p={12} background="#2D3748" rounded={6}>
+        <Flex height="100vh" alignItems="center" justifyContent="center" background="gray.700" >
+            <Flex direction="column" p={12} background="gray.100" rounded={6}>
                 <Heading mb={6}>Sign up
                 </Heading>
-                <Input type="text" value={firstName} onChange={handleFirstName} placeholder="first name" variant="filled" mb={3}></Input>
-                <Input type="text" value={lastName} onChange={handleLastName} placeholder="last name" variant="filled" mb={3}></Input>
+                <Input type="text" value={firstName} onChange={handleFirstName} placeholder="first name" variant="filled" mb={3} isInvalid errorBorderColor="gray.400"></Input>
+                <Input type="text" value={lastName} onChange={handleLastName} placeholder="last name" variant="filled" mb={3} isInvalid errorBorderColor="gray.400"></Input>
                 <HandleEmailTakenAlert />
                 <HandleEmailInvalidAlert />
-                <Input type="text" value={email} onChange={handleEmail} placeholder="email" variant="filled" mb={3}></Input>
+                <Input type="text" value={email} onChange={handleEmail} placeholder="email" variant="filled" mb={3} isInvalid errorBorderColor="gray.400"></Input>
                 <HandlePasswordInvalidAlert/>
-                <Input type="password" value={password} onChange={handlePassword} placeholder="*********" variant="filled" mb={3}></Input>
+                <Input type="password" value={password} onChange={handlePassword} placeholder="*********" variant="filled" mb={3} isInvalid errorBorderColor="gray.400"></Input>
                 <Button onClick={register} mb={6} colorScheme="teal">Register</Button>
                 <Text>Already have an account?</Text>
                 <Button onClick={() => history(`/Login`)} mb={6} size="md" colorScheme="red">Sign in</Button>

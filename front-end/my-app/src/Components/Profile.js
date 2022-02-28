@@ -22,11 +22,11 @@ function Profile() {
     function stats() {
         return (
             <Flex ml={5} justifyContent="center" background="#2D3748" width="100%">
-                <Flex direction="column" background="#2D3748" rounded={6}>
+                <Flex direction="column" background="gray.100" rounded={6}>
                     <Heading mb={6}>User Details</Heading>
-                    <Input type="number" value={age} onChange={handleAge} placeholder="Age (years)" variant="" mb={3}></Input>
-                    <Input type="number" value={weight} onChange={handleWeight} placeholder="Weight (lbs)" variant="" mb={3}></Input>
-                    <Input type="number" value={height} onChange={handleHeight} placeholder="Height (ft)" variant="" mb={3}></Input>
+                    <Input type="number" value={age} onChange={handleAge} placeholder="Age (years)" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
+                    <Input type="number" value={weight} onChange={handleWeight} placeholder="Weight (lbs)" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
+                    <Input type="number" value={height} onChange={handleHeight} placeholder="Height (ft)" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
                     <Button mb={6} size="md" colorScheme="red">Submit</Button>
                 </Flex>
             </Flex>

@@ -86,12 +86,12 @@ function LoginPage() {
 
     return (
         <ChakraProvider>
-        <Flex height="100vh" alignItems="center" justifyContent="center">
-            <Flex direction="column" p={12} background="#2D3748" rounded={6}>
+        <Flex height="100vh" alignItems="center" justifyContent="center" background="gray.700">
+            <Flex direction="column" p={12} background="gray.100" rounded={6}>
                 <Heading mb={6}>Log in
                 </Heading>
-                <Input type="text" onChange={handleEmail} placeholder="email" variant="filled" mb={3}></Input>
-                <Input type="password" onChange={handlePassword} placeholder="*********" variant="filled" mb={6}></Input>
+                <Input type="text" onChange={handleEmail} placeholder="email" variant="filled" mb={3} isInvalid errorBorderColor="gray.400"></Input>
+                <Input type="password" onChange={handlePassword} placeholder="*********" variant="filled" mb={6} isInvalid errorBorderColor="gray.400"></Input>
                 <HandleIncorrectPasswordAlert/>
                 <Button onClick={LoginAuthentication} mb={3} colorScheme="teal">Log in</Button>
                 <Text>Dont have an account? Sign up!</Text>
