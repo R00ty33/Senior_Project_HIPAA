@@ -10,7 +10,7 @@ function Inventory() {
     const [items, setItems] = useState('')
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/inventory/getAllItems/v1', {
+        axios.get('https://localhost:8843/api/inventory/getAllItems/v1', {
         }).then((response) => {
             console.log(response.data);
             setItems(organizeItems(response.data))
