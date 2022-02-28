@@ -69,7 +69,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         jwtCookie.setDomain("localhost");
         jwtCookie.setPath("/");
         response.addCookie(jwtCookie);
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+        response.setHeader("Access-Control-Allow-Origin", "https://localhost:3000");
         response.setHeader("Access-Control-Allow-Credentials", "true");
         new ObjectMapper().writeValue(response.getOutputStream(), tokens);
     }

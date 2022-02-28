@@ -18,7 +18,7 @@ const CookieProvider = {
     getEcommerceCookie: async function() {
         if(!document.cookie) {
             console.log("Fetching cookie");
-            Axios.get('http://localhost:8080/api/createCookies', {withCredentials: true, crossorigin: true, origin: "http://localhost:3000"
+            Axios.get('http://localhost:8081/api/createCookies', {withCredentials: true, crossorigin: true, origin: "http://localhost:3000"
             }).then((response) => {
                 console.log("Cookie received");
             }).catch((err) => {
