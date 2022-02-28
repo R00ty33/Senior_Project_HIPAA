@@ -40,7 +40,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         authenticationFilter.setFilterProcessesUrl("/api/login");
         http.csrf().disable(); /* disables XSS */
         http.cors();
-
         http.sessionManagement().sessionCreationPolicy(STATELESS); /* STATELESS */
         http.authorizeRequests().anyRequest().permitAll();
         http.addFilter(authenticationFilter);
