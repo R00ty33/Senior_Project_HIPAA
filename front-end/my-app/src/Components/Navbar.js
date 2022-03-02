@@ -65,6 +65,7 @@ function Navbar() {
                     <NavItem url="/Inventory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" />
                     <NavItem url="/HIPAA" navSize={navSize} icon={FaFileMedical} title="HIPAA" active/>
                     <NavItem url="/Cart" navSize={navSize} icon={FaShoppingCart} title="Cart" />
+                    
                 </div>
             )
         }
@@ -88,11 +89,7 @@ function Navbar() {
                 {getActiveSideBar()}
                 <Flex p="2%" flexDir="column" w="100%" alignItems={navSize == "small" ? "center" : "flex-start"} mb={4}>
                     <Divider display={navSize == "small" ? "none" : "flex"} />
-                    <Flex mt={4} align="center" pos="absolute" bottom="20" mb={4}>
-                        <Heading as="h3" size="sm">
-                                <NavItem url={isLoggedIn ? "/Profile" : ""} navSize={navSize} icon={CgProfile} title={isLoggedIn ? TokenProvider.getUserName() : "Guest"}/>
-                        </Heading>
-                    </Flex>
+                    <NavItem url={isLoggedIn ? "/Profile" : "/Profile"} navSize={navSize} icon={CgProfile} title={isLoggedIn ? TokenProvider.getUserName() : "Guest"}/>
                     <Flex mt={4} align="center" pos="absolute" bottom="0">
                         <Flex flexDir="column">
                             <Heading as="h3" size="sm">

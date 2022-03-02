@@ -6,6 +6,9 @@ function Cart() {
         <ChakraProvider>
             <Flex width="100%">
                 <Navbar/>
+                <Flex ml={4} mt={4} mr={4} backgroundColor="gray.700" display="inline" width="100%" flexDirection="column" justifyContent="center" verticalAlign="top" textAlign="center">
+
+                </Flex>
             </Flex>
         </ChakraProvider>
     )

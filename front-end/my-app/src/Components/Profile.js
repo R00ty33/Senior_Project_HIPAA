@@ -21,9 +21,9 @@ function Profile() {
 
     function stats() {
         return (
-            <Flex ml={5} justifyContent="center" background="#2D3748" width="100%">
-                <Flex direction="column" background="gray.100" rounded={6}>
-                    <Heading mb={6}>User Details</Heading>
+            <Flex ml={4} mt={4} mr={4} backgroundColor="gray.700" width="100%" alignItems="center" justifyContent="center">
+                <Flex p={12} direction="column" background="gray.100" rounded={6} >
+                    <Heading mb={6}>User Details</Heading> 
                     <Input type="number" value={age} onChange={handleAge} placeholder="Age (years)" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
                     <Input type="number" value={weight} onChange={handleWeight} placeholder="Weight (lbs)" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
                     <Input type="number" value={height} onChange={handleHeight} placeholder="Height (ft)" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
