@@ -43,7 +43,7 @@ function SignUpPage() {
     /** check if password is valid */
     const validatePassword = (password) => {
         var schema = new passwordValidator();
-        schema.is().min(8).has().uppercase().has().lowercase().has().digits(1).has().not().spaces();
+        schema.is().min(7).has().uppercase().has().lowercase().has().digits(1).has().not().spaces()
         if(!schema.validate(password)) {
             setPasswordInvalidAlert(true);
             return false;

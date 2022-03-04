@@ -13,5 +13,5 @@ import javax.transaction.Transactional;
 public interface CartRepository extends JpaRepository<Cart, Long> {
     @Query("SELECT s FROM Cart s WHERE s.cart_cookie = ?1")
     Cart findByCookie(String cart_cookie);
-
+    
 }

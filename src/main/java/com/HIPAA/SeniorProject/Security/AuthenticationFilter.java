@@ -49,12 +49,14 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                 .withSubject(user.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + 15 * 60 * 1000)) /* 15 mins */
                 .withIssuer(request.getRequestURL().toString())
+                .withClaim("ROLE", "ROLE_USER")
                 .sign(algorithm);
 
         String refresh_token = JWT.create()
                 .withSubject(user.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + 30 * 60 * 1000)) /* 30 mins */
                 .withIssuer(request.getRequestURL().toString())
+                .withClaim("ROLE", "ROLE_USER")
                 .sign(algorithm);
         Map<String, String> tokens = new HashMap<>();
         tokens.put("access_token", access_token);
