@@ -5,6 +5,7 @@ import com.HIPAA.SeniorProject.Model.Inventory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
@@ -13,5 +14,9 @@ import javax.transaction.Transactional;
 public interface CartRepository extends JpaRepository<Cart, Long> {
     @Query("SELECT s FROM Cart s WHERE s.cart_cookie = ?1")
     Cart findByCookie(String cart_cookie);
-    
+
+    //@Query("SELECT ci.inventory_id FROM Cart c inner join cart_cart_inventory ci on ci.cart_id = c.id and c.cart_cookie = ?1")
+    @Query("SELECT c from Cart c left join fetch c.inventory WHERE c.cart_cookie = ?1")
+    Cart getCartInventoryIds(String cart_cookie);
+
 }

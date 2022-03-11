@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 /** Handles Request from Client, RESTful web service, creates JSON/XML response body */
@@ -27,9 +28,8 @@ public class CartController {
    }
 
    @PostMapping("/getCart")
-    public List<Inventory> getCart(@RequestParam String cart_cookie) {
-        cartService.getCart(cart_cookie);
-        return null;
+    public Set<Inventory> getCart(@RequestParam String cart_cookie) {
+        return cartService.getCart(cart_cookie);
    }
 
 }
