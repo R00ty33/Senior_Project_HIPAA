@@ -4,6 +4,7 @@ import { ChakraProvider, Button, Flex, Heading, Input, useColorModeValue, Text, 
 import { useNavigate } from 'react-router-dom';
 import tokenProvider from './TokenProvider'
 import authProvider from './AuthProvider'
+import CookieProvider from './CookieProvider';
 
 function LoginPage() {
     const formBackground = useColorModeValue("gray.700") /** Light Mode = gray.100,     Dark Mode = gray.700 */  
@@ -30,7 +31,8 @@ function LoginPage() {
         params.append('email', email);
         params.append('password', password);
 
-        Axios.post('https://localhost:8843/api/login', params, {withCredentials: true, crossorigin: true, origin: "https://localhost:3000"}).then((response) => {
+        Axios.post('https://localhost:8843/api/login', params, {withCredentials: true, crossorigin: true, origin: "https://localhost:3000"}
+        ).then((response) => {
             console.log(response.status, response, response.data);
             if (response.data.message === 'Unauthorized') {
                 setIncorrectPasswordAlert(true);
@@ -41,6 +43,7 @@ function LoginPage() {
                 //tokenProvider.setTokens(access_token, refresh_token);
                 //console.log(tokenProvider.getAccessToken());
                 //console.log("Logged in: " + tokenProvider.isLoggedIn())
+                CookieProvider.checkForEcommerceCookie();
                 return history('/Home');
             }
         }).catch((err) => {

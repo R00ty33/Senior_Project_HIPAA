@@ -8,23 +8,29 @@ import CookieProvider from './CookieProvider.js';
 
 function Inventory() {
     const [items, setItems] = useState('')
+    let mount = true;
 
     useEffect(() => {
-        axios.get('https://localhost:8843/api/inventory/getAllItems/v1', {
-        }).then((response) => {
-            console.log(response.data);
-            setItems(organizeItems(response.data))
-        }).catch((error) => {
-            console.log(error.message)
+        CookieProvider.checkForEcommerceCookie().then(() => {
+            axios.get('https://localhost:8843/api/inventory/getAllItems/v1', {
+            }).then((response) => {
+                console.log(response.data);
+                setItems(organizeItems(response.data))
+            }).catch((error) => {
+                console.log(error.message)
+            })
         })
     }, []); // [] = mount & unmount
 
     function addToCart(item) {
+        if (mount) {
+            CookieProvider.checkForEcommerceCookie();
+            mount = false;
+        }
         const params = new URLSearchParams();
         params.append('product_name', item);
         params.append('cart_cookie', CookieProvider.getCookie("ecommerceCookie"));
         axios.post('https://localhost:8843/api/cart/addItem', params, {withCredentials: true, crossorigin: true, origin: "https://localhost:3000"}).then((response) => {
-
         }).catch((error) => {
              console.log(error.message);
         })
@@ -58,7 +64,6 @@ function Inventory() {
                     </Box>
                 </Box>)
         }
-        console.log("finsihed")
         return (
             <SimpleGrid columns={3} spacing={8}>
                 {formattedData}

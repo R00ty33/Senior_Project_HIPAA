@@ -10,6 +10,7 @@ const AuthProvider = {
     logout: function() {
         console.log("Logged Out");
         CookieProvider.deleteCookie("JWTCookie")
+        CookieProvider.deleteCookie("ecommerceCookie")
     },
 
     useAuth: function() {

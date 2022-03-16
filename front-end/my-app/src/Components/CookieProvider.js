@@ -31,6 +31,47 @@ const CookieProvider = {
         }
     },
 
+    updateEcommerceCookie: async function() {
+        Axios.post('https://localhost:8843/api/updateEcommerceCookie?cookie=' + CookieProvider.getCookie("ecommerceCookie") + "&jwt=" + CookieProvider.getCookie("JWTCookie"), {withCredentials: true, crossorigin: true, origin: "https://localhost:3000"
+        }).then((response) => {
+            console.log("User does not have a EcommerceCookie in DB")
+        }).catch((err) => {
+            console.log("Promise Rejected", err.message, err.response.data);
+        })
+    },
+
+    checkForEcommerceCookie: async function() {
+        if (getCookie("JWTCookie")) {
+            Axios.get('https://localhost:8843/api/getEcommerceCookie?jwt=' + CookieProvider.getCookie("JWTCookie"), {withCredentials: true, crossorigin: true, origin: "https://localhost:3000"
+            }).then((response) => {
+                console.log("User already has a EcommerceCookie in DB\nOverriding cookie");
+            }).catch((err) => {
+                if (err.status = 404) {
+                    if (!getCookie("ecommerceCookie")) { 
+                        this.getEcommerceCookie().then(() => {
+                            Axios.post('https://localhost:8843/api/updateEcommerceCookie?cookie=' + CookieProvider.getCookie("ecommerceCookie") + "&jwt=" + CookieProvider.getCookie("JWTCookie"), {withCredentials: true, crossorigin: true, origin: "https://localhost:3000"
+                            }).then((response) => {
+                                console.log("User does not have a EcommerceCookie in DB")
+                            }).catch((err) => {
+                                console.log("Promise Rejected", err.message, err.response.data);
+                            })
+                        })
+                    } else {
+                        Axios.post('https://localhost:8843/api/updateEcommerceCookie?cookie=' + CookieProvider.getCookie("ecommerceCookie") + "&jwt=" + CookieProvider.getCookie("JWTCookie"), {withCredentials: true, crossorigin: true, origin: "https://localhost:3000"
+                        }).then((response) => {
+                            console.log("User does not have a EcommerceCookie in DB")
+                        }).catch((err) => {
+                            console.log("Promise Rejected", err.message, err.response.data);
+                        })
+                    }
+                }
+            }) 
+        }
+        else {
+            this.getEcommerceCookie();
+        }
+    },
+
     deleteCookie: function(name) {
         document.cookie = name+'=; Max-Age=-9999999999,';
     }

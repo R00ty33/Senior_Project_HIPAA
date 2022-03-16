@@ -13,8 +13,6 @@ import Profile from './Components/Profile'
 
 function App() {
 
-  CookieProvider.getEcommerceCookie();
-
   return (
     <ChakraProvider>
       <BrowserRouter>

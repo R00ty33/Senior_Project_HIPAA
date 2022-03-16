@@ -3,6 +3,7 @@ import Axios from 'axios'; // API
 import { ChakraProvider, Button, Flex, Heading, Input, useColorModeValue, Text, Alert, AlertIcon, AlertTitle, AlertDescription, CloseButton } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import tokenProvider from './TokenProvider';
+import CookieProvider from './CookieProvider';
 const validator = require("email-validator");
 const passwordValidator = require('password-validator');
 

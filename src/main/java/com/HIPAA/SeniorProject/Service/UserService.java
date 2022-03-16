@@ -2,6 +2,7 @@ package com.HIPAA.SeniorProject.Service;
 
 
 import com.HIPAA.SeniorProject.Model.*;
+import com.HIPAA.SeniorProject.Repository.CartRepository;
 import com.HIPAA.SeniorProject.Repository.RolesRepository;
 import com.HIPAA.SeniorProject.Repository.UserCredentialsRepository;
 import com.HIPAA.SeniorProject.Repository.UserRepository;
@@ -19,6 +20,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
 import java.util.ArrayList;
@@ -32,6 +34,8 @@ public class UserService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
     private final UserCredentialsRepository userCredentialsRepository;
     private final RolesRepository rolesRepository;
+    private final CartRepository cartRepository;
+    private final CookieService cookieService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -105,5 +109,32 @@ public class UserService implements UserDetailsService {
         Role role = new Role();
         role.setName(roleName);
         user.setRole(role);
+    }
+
+    public void updateEcommerceCookie(String cookie, String jwt) throws Exception {
+        String email = authorizationByJWT(jwt);
+        if (email == null) {
+            log.error("Not Authorized. updateEcommerceCookie method aborted");
+        } else {
+            Cart cart = cartRepository.findByCookie(cookie);
+            userRepository.updateCartCookie(cart, email);
+        }
+    }
+
+    public void getEcommerceCookieIfExists(String jwt, HttpServletResponse response) throws Exception {
+        String email = authorizationByJWT(jwt);
+        if (email == null) {
+            log.error("Not Authorized. getEcommerceCookieIfExists method aborted");
+        } else {
+            Cart cart = userRepository.getCookie(email);
+            if (cart != null) {
+                String cookieValue = cart.getCart_cookie();
+                cookieService.createCookie(response, cookieValue);
+            } else {
+                response.sendError(404, "User does not have a Cart Cookie");
+                response.setHeader("Access-Control-Allow-Origin", "https://localhost:3000");
+                response.setHeader("Access-Control-Allow-Credentials", "true");
+            }
+        }
     }
 }

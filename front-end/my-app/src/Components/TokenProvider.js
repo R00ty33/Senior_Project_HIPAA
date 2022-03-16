@@ -79,7 +79,7 @@ const TokenProvider = {
             return false;
         }
         else {
-            console.log("Is logged in: true" + CookieProvider.getCookie("JWTCookie"))
+            console.log("Is logged in: true - " + CookieProvider.getCookie("JWTCookie"))
             return true;
         }
     }

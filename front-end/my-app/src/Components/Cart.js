@@ -8,13 +8,15 @@ function Cart() {
     const [items, setItems] = useState('')
 
     useEffect(() => {
-        let cartCookie = cookieProvider.getCookie("ecommerceCookie")
-        axios.post('https://localhost:8843/api/cart/getCart?cart_cookie='+ cartCookie, {withCredentials: true, crossorigin: true, origin: "https://localhost:3000"})
-        .then((response) => {
-            console.log(response.data);
-            setItems(organizeItems(response.data))
-        }).catch((error) => {
-            console.log(error.message)
+        cookieProvider.checkForEcommerceCookie().then(() => {
+            let cartCookie = cookieProvider.getCookie("ecommerceCookie")
+            axios.post('https://localhost:8843/api/cart/getCart?cart_cookie='+ cartCookie, {withCredentials: true, crossorigin: true, origin: "https://localhost:3000"})
+            .then((response) => {
+                console.log(response.data);
+                setItems(organizeItems(response.data))
+            }).catch((error) => {
+                console.log(error.message)
+            })
         })
     }, []); // [] = mount & unmount
 
@@ -44,7 +46,6 @@ function Cart() {
                         </Box>
                     </Box>)
         }
-        console.log("finsihed")
         return (
             <SimpleGrid columns={1} spacing={2}>
                 {formattedData}
