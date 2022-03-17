@@ -28,7 +28,10 @@ function SignUpPage() {
                     firstName: firstName,
                     lastName: lastName,
                     email: email,
-                    password: password
+                    password: password,
+                    withCredentials: true, 
+                    crossorigin: true, 
+                    origin: "https://localhost:3000"
                 }).then((response) => {
                     console.log(response.status, response, response.data);
                     history(`/Login`);
