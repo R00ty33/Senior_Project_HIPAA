@@ -69,9 +69,26 @@ function Navbar() {
                 </div>
             )
         }
+        if (window.location.pathname == "/Checkout") {
+            return (
+                <div>
+                    <NavItem url="/Home" navSize={navSize} icon={FaClinicMedical} title="Home" />
+                    <NavItem url="/Inventory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" />
+                    <NavItem url="/HIPAA" navSize={navSize} icon={FaFileMedical} title="HIPAA" active/>
+                    <NavItem url="/Cart" navSize={navSize} icon={FaShoppingCart} title="Cart" />
+                    
+                </div>
+            )
+        }
     }
 
     const getUser = () => {
+    }
+
+    const getProfile = () => {
+        if (isLoggedIn) {
+            return <NavItem url={isLoggedIn ? "/Profile" : "/Profile"} navSize={navSize} icon={CgProfile} title={isLoggedIn ? TokenProvider.getUserName() : "Guest"}/>
+        }
     }
 
     return (
@@ -89,7 +106,7 @@ function Navbar() {
                 {getActiveSideBar()}
                 <Flex p="2%" flexDir="column" w="100%" alignItems={navSize == "small" ? "center" : "flex-start"} mb={4}>
                     <Divider display={navSize == "small" ? "none" : "flex"} />
-                    <NavItem url={isLoggedIn ? "/Profile" : "/Profile"} navSize={navSize} icon={CgProfile} title={isLoggedIn ? TokenProvider.getUserName() : "Guest"}/>
+                    {getProfile()}
                     <Flex mt={4} align="center" pos="absolute" bottom="0">
                         <Flex flexDir="column">
                             <Heading as="h3" size="sm">

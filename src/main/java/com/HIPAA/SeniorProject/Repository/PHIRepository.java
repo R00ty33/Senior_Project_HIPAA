@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 /** responsible for data access */
 public interface PHIRepository extends JpaRepository<PHI, Long> {
 
+    @Query("SELECT p FROM PHI p JOIN User u ON p.user = u.id WHERE u.email = ?1")
+    PHI findPHIByEmail(String email);
 }

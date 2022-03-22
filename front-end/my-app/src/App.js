@@ -10,6 +10,7 @@ import InventoryPage from "./Components/Inventory";
 import PrivateRoute from './Components/PrivateRoute';
 import Cart from './Components/Cart'
 import Profile from './Components/Profile'
+import Checkout from "./Components/Checkout.js";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
           <Route exact path='/Inventory' element={<InventoryPage/>} />
           <Route exact path='/Cart' element={<Cart/>} />
           <Route exact path='/Profile' element={<Profile/>} />
+          <Route exact path='Checkout' element={<Checkout/>}/>
           <Route path='/' element={<HomePage/>} />
         </Routes>
       </BrowserRouter>

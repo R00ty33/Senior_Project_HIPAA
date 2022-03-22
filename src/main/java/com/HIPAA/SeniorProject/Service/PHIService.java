@@ -29,7 +29,7 @@ public class PHIService {
 
     public void addPHI(String jwt, String age, String weight, String height) throws Exception {
         String email = userService.authorizationByJWT(jwt);
-        if (email != null) {
+        if (email != null && !doesPHIExist(jwt)) {
             final String password = "secret";
             final String salt = KeyGenerators.string().generateKey(); //AES 256
             TextEncryptor encryptor = Encryptors.text(password, salt);
@@ -39,6 +39,22 @@ public class PHIService {
             User user = userRepository.findUserByEmail(email);
             PHI phi = new PHI(encryptor.encrypt(age), encryptor.encrypt(weight), encryptor.encrypt(height), salt, user);
             phiRepository.save(phi);
+        }
+        /**
+         * else {
+         *    updatePHI
+         * }
+         */
+    }
+
+    public boolean doesPHIExist(String jwt) throws Exception {
+        String email = userService.authorizationByJWT(jwt);
+        PHI phi = phiRepository.findPHIByEmail(email);
+        if (phi != null) {
+            return true;
+        }
+        else {
+            return false;
         }
     }
 }

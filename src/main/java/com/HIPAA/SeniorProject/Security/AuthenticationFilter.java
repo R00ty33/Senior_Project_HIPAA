@@ -47,14 +47,14 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         Algorithm algorithm = Algorithm.HMAC256("secret");
         String access_token = JWT.create()
                 .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 15 * 60 * 1000)) /* 15 mins */
+                .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000)) /* 60 mins */
                 .withIssuer(request.getRequestURL().toString())
                 .withClaim("ROLE", "ROLE_USER")
                 .sign(algorithm);
 
         String refresh_token = JWT.create()
                 .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 30 * 60 * 1000)) /* 30 mins */
+                .withExpiresAt(new Date(System.currentTimeMillis() + 120 * 60 * 1000)) /* 120 mins */
                 .withIssuer(request.getRequestURL().toString())
                 .withClaim("ROLE", "ROLE_USER")
                 .sign(algorithm);

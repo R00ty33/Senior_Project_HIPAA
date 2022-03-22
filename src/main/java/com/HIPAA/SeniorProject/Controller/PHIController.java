@@ -24,4 +24,9 @@ public class PHIController {
         System.out.println(jwt);
         phiService.addPHI(jwt, age, weight, height);
     }
+
+    @GetMapping("/Exists")
+    public boolean Exists(String jwt) throws Exception {
+        return phiService.doesPHIExist(jwt);
+    }
 }

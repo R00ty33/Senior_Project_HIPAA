@@ -27,6 +27,10 @@ public class User {
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="role_name")
     private Role role;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    private UserCredentials userCredentials;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    private PHI phi;
 
     public User() {
     }
