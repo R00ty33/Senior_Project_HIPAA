@@ -72,6 +72,12 @@ const TokenProvider = {
         return decoded.substring(0, decoded.indexOf('@'))
     },
 
+    getRole: function () {
+        let token = CookieProvider.getCookie("JWTCookie");
+        let decoded = jwt(token).ROLE;
+        return decoded;
+    },
+
     isLoggedIn: function() { 
         // if (localStorage.getItem("ACCESS_TOKEN")) return false;
         if ((isExpired(getExpirationDate(CookieProvider.getCookie("JWTCookie"))))) {

@@ -3,6 +3,8 @@ import {ChakraProvider, Flex, Text, Stack, IconButton, Divider, Avatar, Heading,
 import { FiBriefcase, FiLogIn, FiHome, FiMenu, FiLogOut } from 'react-icons/fi'
 import {CgProfile} from 'react-icons/cg'
 import {FaBriefcaseMedical, FaClinicMedical, FaFileMedical, FaShoppingCart} from 'react-icons/fa'
+import {GrUserAdmin} from 'react-icons/gr'
+import {GoRocket} from 'react-icons/go'
 import NavItem from "./NavItem"
 import { Squash as Hamburger } from 'hamburger-react'
 import AuthProvider from './AuthProvider'
@@ -87,7 +89,20 @@ function Navbar() {
 
     const getProfile = () => {
         if (isLoggedIn) {
-            return <NavItem url={isLoggedIn ? "/Profile" : "/Profile"} navSize={navSize} icon={CgProfile} title={isLoggedIn ? TokenProvider.getUserName() : "Guest"}/>
+            return (
+                <>
+                    <NavItem url={isLoggedIn ? "/Profile" : "/Profile"} navSize={navSize} icon={CgProfile} title={isLoggedIn ? TokenProvider.getUserName() : "Guest"}/>
+                    <NavItem url={isLoggedIn ? "/Orders" : "/Orders"} navSize={navSize} icon={GoRocket} title={"Orders"}/>
+                </>
+            )
+        }
+    }
+
+    const getAdminPanel = () => {
+        if (TokenProvider.getRole == "ROLE_ADMIN" && isLoggedIn) {
+            return (
+                <NavItem url={isLoggedIn ? "/Role" : "/Profile"} navSize={navSize} icon={GrUserAdmin} title={TokenProvider.getRole()}/>
+            )
         }
     }
 
@@ -107,6 +122,7 @@ function Navbar() {
                 <Flex p="2%" flexDir="column" w="100%" alignItems={navSize == "small" ? "center" : "flex-start"} mb={4}>
                     <Divider display={navSize == "small" ? "none" : "flex"} />
                     {getProfile()}
+                    {getAdminPanel()}
                     <Flex mt={4} align="center" pos="absolute" bottom="0">
                         <Flex flexDir="column">
                             <Heading as="h3" size="sm">

@@ -124,7 +124,7 @@ function Cart() {
                         </Flex>
                     </Box>
                 </SimpleGrid>
-                    <Text color="white">Total: USD ${subTotal}</Text>  
+                    <Heading as="h1" size="lg" color="white" mt={4}>Total: USD ${subTotal}</Heading>
                     <PHIAlert/>
                     <Button ml="auto" mr="auto" width="20%" direction="column" textAlign="center" onClick={handleSubmit} rounded={6} mb={6} colorScheme="red">Checkout</Button>
                 </Flex>

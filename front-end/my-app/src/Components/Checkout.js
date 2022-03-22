@@ -47,8 +47,8 @@ function Checkout() {
 
     function stats() {
         return (
-            <Flex mt={4} mr={4} backgroundColor="#48D1CC" width="100%" alignItems="center" justifyContent="center">
-                <Flex p={12} direction="column" background="#48D1CC" rounded={6} width="70%">
+            <Flex mt={4} mr={4} backgroundColor="gray.700" width="100%" alignItems="center" justifyContent="center">
+                <Flex p={12} direction="column" background="gray.400" rounded={6} width="70%">
                     <Heading mb={6}>Checkout</Heading> 
                     <Input type="text" value={height} placeholder="Name" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
                     <Input type="text" value={height} placeholder="Email" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>

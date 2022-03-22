@@ -69,7 +69,7 @@ export default function GetCart() {
                     </Flex>
                 </Box>
             </SimpleGrid>
-                <Text color="Black">Total: USD ${subTotal}</Text>  
+                <Heading as="h1" size="lg">Total: USD ${subTotal}</Heading>
             </Flex>
         </Flex>
     </ChakraProvider>
