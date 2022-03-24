@@ -51,7 +51,8 @@ function Checkout() {
             <Flex mt={4} mr={4} backgroundColor="gray.700" width="100%" alignItems="center" justifyContent="center">
                 <Flex p={12} direction="column" background="gray.400" rounded={6} width="80%" height="60%">
                     <Heading textAlign="center" mb={6}>Checkout</Heading> 
-                    <Input type="text" value={height} placeholder="Name" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
+                    <Input type="text" value={height} placeholder="First Name" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
+                    <Input type="text" value={height} placeholder="Last Name" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
                     <Input type="text" value={height} placeholder="Email" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
                     <Input type="text" value={height} placeholder="Address" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
                     <Input type="text" value={height} placeholder="City" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>

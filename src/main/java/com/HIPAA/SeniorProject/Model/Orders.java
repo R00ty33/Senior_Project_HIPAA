@@ -25,10 +25,19 @@ public class Orders implements Serializable {
     @JoinTable(name = "orders_inventory",
             joinColumns = {@JoinColumn(name = "order_id")},
             inverseJoinColumns = {@JoinColumn(name = "invetory_id")})
-    private Set<Inventory> inventory;
+    private Set<Inventory> order_inventory;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="user_id")
+    private User user;
 
     public Orders() {
 
+    }
+
+    public Orders(String order_hash, Set<Inventory> order_inventory, User user) {
+        this.order_hash = order_hash;
+        this.order_inventory = order_inventory;
+        this.user = user;
     }
 
     public Long getId() {
@@ -48,10 +57,10 @@ public class Orders implements Serializable {
     }
 
     public Set<Inventory> getInventory() {
-        return inventory;
+        return order_inventory;
     }
 
     public void setInventory(Set<Inventory> inventory) {
-        this.inventory = inventory;
+        this.order_inventory = inventory;
     }
 }

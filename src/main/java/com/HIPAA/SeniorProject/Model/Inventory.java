@@ -11,7 +11,7 @@ import static javax.persistence.GenerationType.AUTO;
 
 @Entity
 @Table(name = "inventory")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "cart"}) /** Stops infinite recursion */
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "cart", "orders"}) /** Stops infinite recursion */
 public class Inventory {
 
     @Id
@@ -36,7 +36,7 @@ public class Inventory {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
             },
-            mappedBy = "inventory")
+            mappedBy = "order_inventory")
     private Set<Orders> orders;
 
     public Inventory() {
