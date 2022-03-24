@@ -82,6 +82,28 @@ function Navbar() {
                 </div>
             )
         }
+        if (window.location.pathname == "/Orders") {
+            return (
+                <div>
+                    <NavItem url="/Home" navSize={navSize} icon={FaClinicMedical} title="Home" />
+                    <NavItem url="/Inventory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" />
+                    <NavItem url="/HIPAA" navSize={navSize} icon={FaFileMedical} title="HIPAA" active/>
+                    <NavItem url="/Cart" navSize={navSize} icon={FaShoppingCart} title="Cart" />
+                    
+                </div>
+            )
+        }
+        if (window.location.pathname == "/Success") {
+            return (
+                <div>
+                    <NavItem url="/Home" navSize={navSize} icon={FaClinicMedical} title="Home" />
+                    <NavItem url="/Inventory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" />
+                    <NavItem url="/HIPAA" navSize={navSize} icon={FaFileMedical} title="HIPAA" active/>
+                    <NavItem url="/Cart" navSize={navSize} icon={FaShoppingCart} title="Cart" />
+                    
+                </div>
+            )
+        }
     }
 
     const getUser = () => {

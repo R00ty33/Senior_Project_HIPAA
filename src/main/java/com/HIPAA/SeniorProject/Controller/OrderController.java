@@ -18,13 +18,13 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping("/checkout")
-    public void checkout(String jwt, String firstName, String lastName, String email, String address,
+    public String checkout(String jwt, String firstName, String lastName, String email, String address,
                          String city, String state, Integer zipcode, Integer cardNumber, Integer csv, String ecommerceCookie) throws Exception {
-        orderService.checkout(jwt, firstName, lastName, email, address, city, state, zipcode, cardNumber, csv, ecommerceCookie);
+        return orderService.checkout(jwt, firstName, lastName, email, address, city, state, zipcode, cardNumber, csv, ecommerceCookie);
     }
 
     @GetMapping("/orders")
-    public List<Orders> checkout(String jwt) throws Exception {
+    public List<Orders> getOrders(String jwt) throws Exception {
         return orderService.getOrders(jwt);
     }
 

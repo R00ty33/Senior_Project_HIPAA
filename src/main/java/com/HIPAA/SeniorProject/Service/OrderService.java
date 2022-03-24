@@ -30,7 +30,7 @@ public class OrderService {
     private final CartService cartService;
     private final InventoryService inventoryService;
 
-    public void checkout(String jwt, String firstName, String lastName, String email, String address,
+    public String checkout(String jwt, String firstName, String lastName, String email, String address,
                          String city, String state, Integer zipcode, Integer cardNumber, Integer csv, String ecommerceCookie) throws Exception {
         String userEmail = userService.authorizationByJWT(jwt);
         String body = jwt + lastName + email + ecommerceCookie;
@@ -42,6 +42,7 @@ public class OrderService {
         if (user == null || inventory == null) throw new Exception("User || Inventory is  null");
         Orders orders = new Orders(theMD5digest.toString(), inventory, user);
         orderRepository.save(orders);
+        return theMD5digest.toString();
     }
 
     public List<Orders> getOrders(String jwt) throws Exception {
