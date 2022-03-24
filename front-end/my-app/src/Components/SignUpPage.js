@@ -17,12 +17,59 @@ function SignUpPage() {
     const [emailTakenAlert, setEmailTakenAlert] = useState(false);
     const [emailInvalidAlert, setEmailInvalidAlert] = useState(false);
     const [passwordInvalidAlert, setPasswordInvalidAlert] = useState(false);
+    const [validateFirstName, setValidateFirstName] = useState(false);
+    const [validateLastName, setValidateLastName] = useState(false);
 
+    const HandleFirstNameAlert = () => {
+        if (validateFirstName) {
+            return firstNameAlert();
+        }
+        else {
+            return (
+                <div></div>
+            )
+        }
+    }
+
+    function firstNameAlert() {
+        return (
+            <Alert status="error" mb={3}>
+                <AlertIcon />
+                <AlertTitle mr={2}></AlertTitle>
+                <AlertDescription>Invalid Value</AlertDescription>
+                <CloseButton position="absolute" onClick={() => setValidateFirstName(false)} right="6px" top="8px"/>
+            </Alert>
+        )
+    }
+
+    const HandleLastNameAlert = () => {
+        if (validateLastName) {
+            return lastNameAlert();
+        }
+        else {
+            return (
+                <div></div>
+            )
+        }
+    }
+
+    function lastNameAlert() {
+        return (
+            <Alert status="error" mb={3}>
+                <AlertIcon />
+                <AlertTitle mr={2}></AlertTitle>
+                <AlertDescription>Invalid Value</AlertDescription>
+                <CloseButton position="absolute" onClick={() => setValidateLastName(false)} right="6px" top="8px"/>
+            </Alert>
+        )
+    }
 
     function register() {
         validateEmail(email);
         validatePassword(password);
-        if (validateEmail(email)) {
+        validateFirst_Name(firstName);
+        validateLast_Name(lastName);
+        if (validateEmail(email) && validateLast_Name(lastName) && validateFirst_Name(firstName)) {
             if (validatePassword(password)) {
                 Axios.post('https://localhost:8843/api/SignUp', {
                     firstName: firstName,
@@ -54,6 +101,26 @@ function SignUpPage() {
         }
         setPasswordInvalidAlert(false);
         return true;
+    }
+    
+    function validateFirst_Name(firstName) {
+        var reWhiteSpace = new RegExp("\\s+");
+        if ((firstName != '' && !reWhiteSpace.test(firstName))) {
+            setValidateFirstName(false)
+            return true;
+        }
+        setValidateFirstName(true)
+        return false;
+    }
+
+    function validateLast_Name(lastName) {
+        var reWhiteSpace = new RegExp("\\s+");
+        if ((lastName != '' && !reWhiteSpace.test(lastName))) {
+            setValidateLastName(false)
+            return true;
+        }
+        setValidateLastName(true)
+        return false;
     }
 
     /** check if email is valid */
@@ -160,7 +227,9 @@ function SignUpPage() {
             <Flex direction="column" p={12} background="gray.100" rounded={6}>
                 <Heading mb={6}>Sign up
                 </Heading>
+                <HandleFirstNameAlert/>
                 <Input type="text" value={firstName} onChange={handleFirstName} placeholder="first name" variant="filled" mb={3} isInvalid errorBorderColor="gray.400"></Input>
+                <HandleLastNameAlert/>
                 <Input type="text" value={lastName} onChange={handleLastName} placeholder="last name" variant="filled" mb={3} isInvalid errorBorderColor="gray.400"></Input>
                 <HandleEmailTakenAlert />
                 <HandleEmailInvalidAlert />

@@ -31,6 +31,13 @@ public class Inventory {
             },
             mappedBy = "inventory")
     private Set<Cart> cart;
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "inventory")
+    private Set<Orders> orders;
 
     public Inventory() {
 

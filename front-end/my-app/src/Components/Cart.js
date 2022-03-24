@@ -18,7 +18,7 @@ function Cart() {
             if (isLoggedIn)  {
                 return (
                     <>
-                    <Alert status="error" mt={6} mb={3} width="40%" ml="auto" mr="auto">
+                    <Alert status="error" mt={6} mb={3} width="30%" ml="auto" mr="auto">
                         <AlertIcon />
                         <AlertTitle mr={-1}></AlertTitle>
                         <AlertDescription maxWidth="sm">Must enter PHI information in Profile Page before continuing...<br></br>
@@ -30,7 +30,7 @@ function Cart() {
             }
             else {
                 return (                    
-                    <Alert status="error" mt={6} mb={3} width="40%" ml="auto" mr="auto">
+                    <Alert status="error" mt={6} mb={3} width="20%" ml="auto" mr="auto" textAlign="center" alignItems="center">
                         <AlertIcon />
                         <AlertTitle mr={-1}></AlertTitle>
                         <AlertDescription maxWidth="sm">Must login before continuing...<br></br>

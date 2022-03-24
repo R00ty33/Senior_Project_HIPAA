@@ -31,6 +31,9 @@ public class User {
     private UserCredentials userCredentials;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     private PHI phi;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="order_hash")
+    private Orders orders;
 
     public User() {
     }
