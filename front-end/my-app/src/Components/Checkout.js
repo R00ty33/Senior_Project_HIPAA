@@ -42,7 +42,9 @@ function Checkout() {
         .then((response) => {
             localStorage.setItem('orderHash', response.data);
             setOrderHash(response.data)
+            cookieProvider.deleteCookie("ecommerceCookie");
         }).then(() => {
+            cookieProvider.getEcommerceCookie();
             history('/Success');
         }).catch((error) => {
             console.log(error.message)

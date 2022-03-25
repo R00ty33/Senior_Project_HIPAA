@@ -10,7 +10,6 @@ import GetCart from './GetCart.js';
 function Orders() {
     const history = useNavigate();
     const [items, setItems] = useState('')
-    const [subTotal, setSubTotal] = useState('')
 
     useEffect(() => {
         cookieProvider.checkForEcommerceCookie().then(() => {
@@ -30,7 +29,7 @@ function Orders() {
 
         for (let k=0; k<data.length; k++) {
             let orderHash = data[k].order_hash;
-            formattedData.push(<Heading><br></br>{orderHash}</Heading>)
+            formattedData.push(<Heading><br></br>Order Hash: {orderHash}</Heading>)
 
             console.log(data[k].inventory.length);
             for (let i=0; i<data[k].inventory.length; i++) {
@@ -39,7 +38,6 @@ function Orders() {
                 let image = data[k].inventory[i].product_image
                 let name = data[k].inventory[i].product_name
                 let description = data[k].inventory[i].product_description
-                setSubTotal((total += price).toFixed(2))
                 formattedData.push(
                     <>
                         <Box w="100%" p={0} ml={0} mt={0} borderWidth='1px' borderRadius='45px' mr={0} backgroundColor="gray.100">
@@ -81,7 +79,6 @@ function Orders() {
                         </Flex>
                     </Box>
                 </SimpleGrid>
-                    <Heading as="h1" size="lg">Total: USD ${subTotal}</Heading>
                 </Flex>
             </Flex>
         </ChakraProvider>

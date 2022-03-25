@@ -42,6 +42,7 @@ public class OrderService {
         if (user == null || inventory == null) throw new Exception("User || Inventory is  null");
         Orders orders = new Orders(theMD5digest.toString(), inventory, user);
         orderRepository.save(orders);
+        userService.updateEcommerceCookie(null, jwt);
         return theMD5digest.toString();
     }
 
