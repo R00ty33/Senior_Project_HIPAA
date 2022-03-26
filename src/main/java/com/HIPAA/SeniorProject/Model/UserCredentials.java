@@ -13,6 +13,7 @@ public class UserCredentials {
     private Long id;
     private String password;
     private String creditCardNO;
+    private String salt;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
@@ -41,6 +42,14 @@ public class UserCredentials {
     public String getCreditCardNO() {return creditCardNO;}
 
     public void setCreditCardNO(String creditCardNO) {this.creditCardNO = creditCardNO;}
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
 
     @Override
     public String toString() {

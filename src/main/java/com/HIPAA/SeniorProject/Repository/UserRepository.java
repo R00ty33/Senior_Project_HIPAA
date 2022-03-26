@@ -26,4 +26,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT s.cookie FROM User s WHERE s.email = ?1")
     Cart getCookie(String email);
+
+    @Modifying
+    @Query("UPDATE UserCredentials s SET s.creditCardNO = ?1, s.salt = ?2 WHERE s.user = ?3")
+    Integer updateUserCreditCardNo(String creditCardNo, String salt, User user);
+
 }

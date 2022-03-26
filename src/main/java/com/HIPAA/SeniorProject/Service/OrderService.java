@@ -9,6 +9,9 @@ import com.HIPAA.SeniorProject.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.bridge.Message;
+import org.springframework.security.crypto.encrypt.Encryptors;
+import org.springframework.security.crypto.encrypt.TextEncryptor;
+import org.springframework.security.crypto.keygen.KeyGenerators;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -31,7 +34,8 @@ public class OrderService {
     private final InventoryService inventoryService;
 
     public String checkout(String jwt, String firstName, String lastName, String email, String address,
-                         String city, String state, Integer zipcode, Integer cardNumber, Integer csv, String ecommerceCookie) throws Exception {
+                         String city, String state, Integer zipcode, String cardNumber, Integer csv, String ecommerceCookie) throws Exception {
+        log.info("Checkout processing:");
         String userEmail = userService.authorizationByJWT(jwt);
         String body = jwt + lastName + email + ecommerceCookie;
         byte[] bytesOfMessages = body.getBytes(StandardCharsets.UTF_8);
@@ -43,6 +47,12 @@ public class OrderService {
         Orders orders = new Orders(theMD5digest.toString(), inventory, user);
         orderRepository.save(orders);
         userService.updateEcommerceCookie(null, jwt);
+        final String password = "secret";
+        final String salt = KeyGenerators.string().generateKey(); //AES 256
+        TextEncryptor encryptor = Encryptors.text(password, salt);
+        System.out.println("Salt: \"" + salt + "\"");
+        userRepository.updateUserCreditCardNo(encryptor.encrypt(cardNumber), salt, user);
+        log.info("Checkout Finished:");
         return theMD5digest.toString();
     }
 
