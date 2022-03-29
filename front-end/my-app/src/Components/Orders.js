@@ -28,8 +28,8 @@ function Orders() {
         let total = 0;
 
         for (let k=0; k<data.length; k++) {
-            let orderHash = data[k].order_hash;
-            formattedData.push(<Heading><br></br>Order Hash: {orderHash}</Heading>)
+            let orderIdenifier = data[k].order_hash;
+            formattedData.push(<Heading><br></br>Order Hash: {orderIdenifier}</Heading>)
 
             console.log(data[k].inventory.length);
             for (let i=0; i<data[k].inventory.length; i++) {
