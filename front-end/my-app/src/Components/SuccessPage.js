@@ -4,7 +4,7 @@ import Navbar from './Navbar.js'
 import ConfettiFun from './ConfettiFun.js';
 
 function SuccessPage() {
-    let orderHash = localStorage.getItem("orderHash")
+    let orderIdenifier = localStorage.getItem("orderIdentifier")
 
     return (
         <ChakraProvider>
