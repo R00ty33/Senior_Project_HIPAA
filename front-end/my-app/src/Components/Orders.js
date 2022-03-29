@@ -29,7 +29,7 @@ function Orders() {
 
         for (let k=0; k<data.length; k++) {
             let orderIdenifier = data[k].order_hash;
-            formattedData.push(<Heading><br></br>Order Hash: {orderIdenifier}</Heading>)
+            formattedData.push(<Heading><br></br>Order Identifier: {orderIdenifier}</Heading>)
 
             console.log(data[k].inventory.length);
             for (let i=0; i<data[k].inventory.length; i++) {

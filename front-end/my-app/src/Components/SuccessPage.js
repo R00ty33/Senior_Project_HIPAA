@@ -4,14 +4,13 @@ import Navbar from './Navbar.js'
 import ConfettiFun from './ConfettiFun.js';
 
 function SuccessPage() {
-    let orderIdenifier = localStorage.getItem("orderIdentifier")
-
+    
     return (
         <ChakraProvider>
             <Flex width="100%">
                 <Navbar/>
                 <Flex ml={4} mt={4} mr={4} backgroundColor="gray.700" width="100%" flexDirection="column" justifyContent="center" textAlign="center">
-                    <Heading color="#1E90FF">Order Hash: {localStorage.getItem("orderHash")}</Heading>
+                    <Heading color="#1E90FF">Order Identifier: {localStorage.getItem("orderHash")}</Heading>
                     <ConfettiFun/>
                 </Flex>
             </Flex>
