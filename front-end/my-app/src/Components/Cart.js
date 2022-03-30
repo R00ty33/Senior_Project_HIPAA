@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChakraProvider, Center, Alert, Image, AlertIcon, AlertTitle, AlertDescription, SimpleGrid, Flex, Heading, Text, useColorMode, useColorModeValue, Button, Box, Container, Grid, GridItem, extendTheme, withDefaultColorScheme} from '@chakra-ui/react';
 import Navbar from './Navbar.js'
+import {MdRemoveShoppingCart} from 'react-icons/md'
 import { useNavigate } from 'react-router-dom';
 import cookieProvider from './CookieProvider'
 import AuthProvider from './AuthProvider.js';
@@ -102,6 +103,7 @@ function Cart() {
                             >
                                 <Text fontSize='lg'>{price}</Text>
                             </Box><Text fontSize='sm' w="75%">{description}</Text>
+                            <Button id={name} leftIcon={<MdRemoveShoppingCart/>} colorScheme='blue' size='xs' onClick={() => removeFromCart(name)}>Delete </Button>
                         </Box>
                     </Box>)
         }
@@ -111,6 +113,27 @@ function Cart() {
             </SimpleGrid>
         )
     }
+
+    function removeFromCart(item) {
+        // if (mount) {
+        //     CookieProvider.checkForEcommerceCookie();
+        //     mount = false;
+        // }
+        // const params = new URLSearchParams();
+        // params.append('product_name', item);
+        // params.append('cart_cookie', CookieProvider.getCookie("ecommerceCookie"));
+        // axios.post('https://localhost:8843/api/cart/addItem', params, {withCredentials: true, crossorigin: true, origin: "https://localhost:3000"}).then((response) => {
+             if (!localStorage.getItem('cartCount')) {
+                 localStorage.setItem('cartCount', 0);
+             } else {
+                 if (!parseInt(localStorage.getItem('cartCount')) == 0) 
+                    localStorage.setItem('cartCount', parseInt(localStorage.getItem('cartCount')) -1);
+             }
+        // }).catch((error) => {
+        //      console.log(error.message);
+        // })
+    }
+
     return (
         <ChakraProvider>
             <Flex width="100%">

@@ -31,6 +31,11 @@ function Inventory() {
         params.append('product_name', item);
         params.append('cart_cookie', CookieProvider.getCookie("ecommerceCookie"));
         axios.post('https://localhost:8843/api/cart/addItem', params, {withCredentials: true, crossorigin: true, origin: "https://localhost:3000"}).then((response) => {
+            if (!localStorage.getItem('cartCount')) {
+                localStorage.setItem('cartCount', 1);
+            } else {
+                localStorage.setItem('cartCount', parseInt(localStorage.getItem('cartCount'))+1);
+            }
         }).catch((error) => {
              console.log(error.message);
         })

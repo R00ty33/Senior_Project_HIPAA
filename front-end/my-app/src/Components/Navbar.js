@@ -17,7 +17,20 @@ function Navbar() {
     const [isOpen, setOpen] = useState(true)
     const [isLoggedIn, setLoggedIn] = useState(AuthProvider.useAuth())
     const [user, setUser] = useState('')
+    let cartCount = localStorage.getItem('cartCount');
 
+    function GetCart() {
+        if (cartCount > 0) {
+            return (
+                <NavItem url="/Cart" navSize={navSize} icon={FaShoppingCart} title={"Items: " + cartCount} />
+            )
+        }
+        else {
+            return (
+                <NavItem url="/Cart" navSize={navSize} icon={FaShoppingCart} title="Cart" />
+            )
+        }
+    }
 
     const getActiveSideBar = () => {
         if (window.location.pathname == "/Home" || window.location.pathname == '/') {
@@ -26,7 +39,7 @@ function Navbar() {
                     <NavItem url="/Home" navSize={navSize} icon={FaClinicMedical} title="Home" active/>
                     <NavItem url="/Inventory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" />
                     <NavItem url="/Compliance" navSize={navSize} icon={FaFileMedical} title="Compliance" />
-                    <NavItem url="/Cart" navSize={navSize} icon={FaShoppingCart} title="Cart" />
+                    <GetCart/>
                 </div>
             )
         }
@@ -36,7 +49,7 @@ function Navbar() {
                     <NavItem url="/Home" navSize={navSize} icon={FaClinicMedical} title="Home" />
                     <NavItem url="/Inventory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" active/>
                     <NavItem url="/Compliance" navSize={navSize} icon={FaFileMedical} title="Compliance" />
-                    <NavItem url="/Cart" navSize={navSize} icon={FaShoppingCart} title="Cart" />
+                    <GetCart/>
                 </div>
             )
         }
@@ -46,7 +59,7 @@ function Navbar() {
                     <NavItem url="/Home" navSize={navSize} icon={FaClinicMedical} title="Home" />
                     <NavItem url="/Inventory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" />
                     <NavItem url="/Compliance" navSize={navSize} icon={FaFileMedical} title="Compliance" active/>
-                    <NavItem url="/Cart" navSize={navSize} icon={FaShoppingCart} title="Cart" />
+                    <GetCart/>
                 </div>
             )
         }
@@ -56,7 +69,7 @@ function Navbar() {
                     <NavItem url="/Home" navSize={navSize} icon={FaClinicMedical} title="Home" />
                     <NavItem url="/Inventory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" />
                     <NavItem url="/Compliance" navSize={navSize} icon={FaFileMedical} title="Compliance" active/>
-                    <NavItem url="/Cart" navSize={navSize} icon={FaShoppingCart} title="Cart" />
+                    <GetCart/>
                 </div>
             )
         }
@@ -66,8 +79,7 @@ function Navbar() {
                     <NavItem url="/Home" navSize={navSize} icon={FaClinicMedical} title="Home" />
                     <NavItem url="/Inventory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" />
                     <NavItem url="/Compliance" navSize={navSize} icon={FaFileMedical} title="Compliance" active/>
-                    <NavItem url="/Cart" navSize={navSize} icon={FaShoppingCart} title="Cart" />
-                    
+                    <GetCart/>                    
                 </div>
             )
         }
@@ -77,8 +89,7 @@ function Navbar() {
                     <NavItem url="/Home" navSize={navSize} icon={FaClinicMedical} title="Home" />
                     <NavItem url="/Inventory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" />
                     <NavItem url="/Compliance" navSize={navSize} icon={FaFileMedical} title="Compliance" active/>
-                    <NavItem url="/Cart" navSize={navSize} icon={FaShoppingCart} title="Cart" />
-                    
+                    <GetCart/>
                 </div>
             )
         }
@@ -88,8 +99,7 @@ function Navbar() {
                     <NavItem url="/Home" navSize={navSize} icon={FaClinicMedical} title="Home" />
                     <NavItem url="/Inventory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" />
                     <NavItem url="/Compliance" navSize={navSize} icon={FaFileMedical} title="Compliance" active/>
-                    <NavItem url="/Cart" navSize={navSize} icon={FaShoppingCart} title="Cart" />
-                    
+                    <GetCart/>                    
                 </div>
             )
         }
@@ -99,8 +109,7 @@ function Navbar() {
                     <NavItem url="/Home" navSize={navSize} icon={FaClinicMedical} title="Home" />
                     <NavItem url="/Inventory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" />
                     <NavItem url="/Compliance" navSize={navSize} icon={FaFileMedical} title="Compliance" active/>
-                    <NavItem url="/Cart" navSize={navSize} icon={FaShoppingCart} title="Cart" />
-                    
+                    <GetCart/>
                 </div>
             )
         }
