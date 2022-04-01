@@ -13,6 +13,7 @@ function Cart() {
     const [subTotal, setSubTotal] = useState('')
     const [isLoggedIn, setLoggedIn] = useState(AuthProvider.useAuth())
     const [alertValue, setAlertValue] = useState(false);
+    const [reload, setReload] = useState(0);
 
     useEffect(() => {
         cookieProvider.checkForEcommerceCookie().then(() => {
@@ -70,6 +71,7 @@ function Cart() {
                 console.log(error.message)
             })
         })
+        setReload(p => p+1);
     }
 
     function handleSubmit() {
@@ -94,6 +96,9 @@ function Cart() {
         let formattedData = [];
         let total = 0;
         for (let i=0; i<data.length; i++) {
+            if (localStorage.getItem('cartCount') == 0) {
+                localStorage.setItem('cartCount', parseInt(localStorage.getItem('cartCount'))+ data.length);
+            }
             let category = data[i].category
             let price = data[i].price
             let image = data[i].product_image

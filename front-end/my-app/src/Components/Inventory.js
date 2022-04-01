@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { ChakraProvider, Center, Flex, SimpleGrid, Stack, Text, Image, Heading, useColorMode, useColorModeValue, Button, Box, Container, Grid, GridItem, extendTheme, withDefaultColorScheme} from '@chakra-ui/react';
 import Navbar from './Navbar.js'
 import axios from 'axios';
@@ -8,6 +8,7 @@ import CookieProvider from './CookieProvider.js';
 
 function Inventory() {
     const [items, setItems] = useState('')
+    const [reload, setReload] = useState(0);
     let mount = true;
 
     useEffect(() => {
@@ -36,6 +37,7 @@ function Inventory() {
             } else {
                 localStorage.setItem('cartCount', parseInt(localStorage.getItem('cartCount'))+1);
             }
+            setReload(p => p+1);
         }).catch((error) => {
              console.log(error.message);
         })

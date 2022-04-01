@@ -11,6 +11,8 @@ const AuthProvider = {
         console.log("Logged Out");
         CookieProvider.deleteCookie("JWTCookie")
         CookieProvider.deleteCookie("ecommerceCookie")
+        localStorage.setItem('cartCount', 0);
+        localStorage.setItem('orderHash', '');
     },
 
     useAuth: function() {
