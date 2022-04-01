@@ -31,7 +31,7 @@ public class Cart implements Serializable {
     @JoinTable(name = "cart_inventory",
             joinColumns = { @JoinColumn(name = "cart_id") },
             inverseJoinColumns = { @JoinColumn(name = "invetory_id") })
-    private Set<Inventory> inventory;
+    private Collection<Inventory> inventory;
 
     public Cart() {
 
@@ -58,11 +58,11 @@ public class Cart implements Serializable {
         this.cart_cookie = cart_cookie;
     }
 
-    public Set<Inventory> getInventory() {
+    public Collection<Inventory> getInventory() {
         return inventory;
     }
 
-    public void setInventory(Set<Inventory> inventory) {
+    public void setInventory(Collection<Inventory> inventory) {
         this.inventory = inventory;
     }
 

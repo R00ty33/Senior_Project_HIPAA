@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ChakraProvider, Alert, AlertIcon, AlertTitle, AlertDescription, CloseButton, Center, Flex, Heading, Text, useColorMode, Input, useColorModeValue, Button, Box, Container, Grid, GridItem, extendTheme, withDefaultColorScheme} from '@chakra-ui/react';
 import Navbar from './Navbar.js'
 import axios from 'axios'; // API 
@@ -6,6 +7,7 @@ import CookieProvider from './CookieProvider'
 import ConfettiFun from './ConfettiFun.js';
 
 function Profile() {
+    const history = useNavigate();
     const [age, setAge] = useState('');
     const [weight, setWeight] = useState('');
     const [height, setHeight] = useState('');
@@ -48,7 +50,7 @@ function Profile() {
             params.append('weight', weight);
             params.append('height', height);
             axios.post('https://localhost:8843/Profile/PHI', params, {withCredentials: true, crossorigin: true, origin: "https://localhost:3000"}).then((response) => {
-                setConfetti(true);
+                history('/Cart');
             }).catch((error) => {
                  console.log(error.message);
             })
@@ -88,7 +90,7 @@ function Profile() {
             <Alert status="error" mb={3}>
                 <AlertIcon />
                 <AlertTitle mr={2}></AlertTitle>
-                <AlertDescription>Invalid Value</AlertDescription>
+                <AlertDescription>Must be 18+</AlertDescription>
                 <CloseButton position="absolute" onClick={() => setAgeAlertValue(false)} right="6px" top="8px"/>
             </Alert>
         )

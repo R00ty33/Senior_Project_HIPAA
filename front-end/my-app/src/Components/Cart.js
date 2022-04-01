@@ -95,6 +95,7 @@ function Cart() {
     function organizeItems(data) {
         let formattedData = [];
         let total = 0;
+        if (data.length == 0) setSubTotal(0);
         for (let i=0; i<data.length; i++) {
             if (localStorage.getItem('cartCount') == 0) {
                 localStorage.setItem('cartCount', parseInt(localStorage.getItem('cartCount'))+ data.length);

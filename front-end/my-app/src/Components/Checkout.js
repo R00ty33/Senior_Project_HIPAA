@@ -24,6 +24,15 @@ function Checkout() {
     const [zipcode, setZipcode] = useState('');
     const [cardNumber, setCardnumber] = useState('');
     const [cvv, setCVV] = useState('');
+    const [firstNameAlert, setFirstNameAlert] = useState('');
+    const [lastNameAlert, setLastNameAlert] = useState('');
+    const [emailAlert, setEmailAlert] = useState('');
+    const [addressAlert, setAddressAlert] = useState('');
+    const [cityAlert, setCityAlert] = useState('');
+    const [stateAlert, setStateAlert] = useState('');
+    const [zipcodeAlert, setZipcodeAlert] = useState('');
+    const [cardNumberAlert, setCardnumberAlert] = useState('');
+    const [cvvAlert, setCVVAlert] = useState('');
     const [orderHash, setOrderHash] = useState('');
     const [confetti, setConfetti] = useState(false);
     var valid = require("card-validator");
@@ -49,6 +58,7 @@ function Checkout() {
             axios.post('https://localhost:8843/api/order/checkout', params, {withCredentials: true, crossorigin: true, origin: "https://localhost:3000"})
             .then((response) => {
                 localStorage.setItem('orderHash', response.data);
+                localStorage.setItem('cartCount', 0);
                 setOrderHash(response.data)
                 cookieProvider.deleteCookie("ecommerceCookie");
             }).then(() => {
@@ -63,53 +73,61 @@ function Checkout() {
     function validateValues() {
         let result = true;
         var reWhiteSpace = new RegExp("\\s+");
-        if ((firstName != '' && !reWhiteSpace.test(firstName))) {
-            setFirstName(true)
+        if ((firstName == '' || reWhiteSpace.test(firstName))) {
+            setFirstNameAlert(true)
             result = false;
         }
-        if ((lastName != '' && !reWhiteSpace.test(lastName))) {
-            setLastName(true)
+        if ((lastName == '' || reWhiteSpace.test(lastName))) {
+            setLastNameAlert(true)
             result = false;
         }
-        if ((email != '' && !reWhiteSpace.test(email) || !validator.validate(email))) {
-            setEmail(true)
+        if ((email != '' && !reWhiteSpace.test(email) && validator.validate(email))) {
+            setEmailAlert(false)
+        } else {
+            setEmailAlert(true)
             result = false;
         }
-        if ((address != '' && !reWhiteSpace.test(address))) {
-            setAddress(true)
+        if ((address == '' || reWhiteSpace.test(address))) {
+            setAddressAlert(true)
             result = false;
         }
-        if ((city != '' && !reWhiteSpace.test(city))) {
-            setCity(true)
+        if ((city == '' || reWhiteSpace.test(city))) {
+            setCityAlert(true)
             result = false;
         }
-        if ((state != '' && !reWhiteSpace.test(state))) {
-            setState(true)
+        if ((state == '' || reWhiteSpace.test(state))) {
+            setStateAlert(true)
             result = false;
         }
-        if (zipcode == '' || zipcode == null || zipcode == new RegExp('^[0-9]*$') || valid.postalCode(zipcode).isInvalid) {
-            setZipcode(true);
+        if (zipcode != '' && zipcode != null && zipcode != new RegExp('^[0-9]*$') && valid.postalCode(zipcode).isValid) {
+            setZipcodeAlert(false);
+        } else {
+            setZipcodeAlert(true)
             result = false;
         }
-        if (cardNumber == '' || cardNumber == null || cardNumber == new RegExp('^[0-9]*$') || valid.number(cardNumber).isInvalid) {
-            setCardnumber(true);
+        if (cardNumber != '' && cardNumber != null && cardNumber != new RegExp('^[0-9]*$') && valid.number(cardNumber).isValid) {
+            setCardnumberAlert(false);
+        } else {
+            setCardnumberAlert(true)
             result = false;
         }
-        if (cvv == '' || cvv == null || cvv == new RegExp('^[0-9]*$') || valid.cvv(cvv).isInvalid) {
-            setCVV(true);
+        if (cvv != '' && cvv != null && cvv != new RegExp('^[0-9]*$') && valid.cvv(cvv).isValid) {
+            setCVVAlert(false);
+        } else {
+            setCVVAlert(true)
             result = false;
         }
         return result;
     }
 
     const CVVAlert = () => {
-        if (cvv) {
+        if (cvvAlert) {
             return (
                 <Alert status="error" mb={3}>
                     <AlertIcon />
                     <AlertTitle mr={2}></AlertTitle>
                     <AlertDescription>Invalid CVV</AlertDescription>
-                    <CloseButton position="absolute" onClick={() => setCVV(false)} right="6px" top="8px"/>
+                    <CloseButton position="absolute" onClick={() => setCVVAlert(false)} right="6px" top="8px"/>
                 </Alert>
             )
         }
@@ -121,13 +139,13 @@ function Checkout() {
     }
 
     const CardNumberAlert = () => {
-        if (cardNumber) {
+        if (cardNumberAlert) {
             return (
                 <Alert status="error" mb={3}>
                     <AlertIcon />
                     <AlertTitle mr={2}></AlertTitle>
                     <AlertDescription>Invalid Card-Number</AlertDescription>
-                    <CloseButton position="absolute" onClick={() => setCardnumber(false)} right="6px" top="8px"/>
+                    <CloseButton position="absolute" onClick={() => setCardnumberAlert(false)} right="6px" top="8px"/>
                 </Alert>
             )
         }
@@ -139,13 +157,13 @@ function Checkout() {
     }
 
     const ZipcodeAlert = () => {
-        if (zipcode) {
+        if (zipcodeAlert) {
             return (
                 <Alert status="error" mb={3}>
                     <AlertIcon />
                     <AlertTitle mr={2}></AlertTitle>
                     <AlertDescription>Invalid Postal Code</AlertDescription>
-                    <CloseButton position="absolute" onClick={() => setZipcode(false)} right="6px" top="8px"/>
+                    <CloseButton position="absolute" onClick={() => setZipcodeAlert(false)} right="6px" top="8px"/>
                 </Alert>
             )
         }
@@ -157,13 +175,13 @@ function Checkout() {
     }
 
     const StateAlert = () => {
-        if (state) {
+        if (stateAlert) {
             return (
                 <Alert status="error" mb={3}>
                     <AlertIcon />
                     <AlertTitle mr={2}></AlertTitle>
                     <AlertDescription>Invalid State</AlertDescription>
-                    <CloseButton position="absolute" onClick={() => setState(false)} right="6px" top="8px"/>
+                    <CloseButton position="absolute" onClick={() => setStateAlert(false)} right="6px" top="8px"/>
                 </Alert>
             )
         }
@@ -175,13 +193,13 @@ function Checkout() {
     }
 
     const CityAlert = () => {
-        if (city) {
+        if (cityAlert) {
             return (
                 <Alert status="error" mb={3}>
                     <AlertIcon />
                     <AlertTitle mr={2}></AlertTitle>
                     <AlertDescription>Invalid City</AlertDescription>
-                    <CloseButton position="absolute" onClick={() => setCity(false)} right="6px" top="8px"/>
+                    <CloseButton position="absolute" onClick={() => setCityAlert(false)} right="6px" top="8px"/>
                 </Alert>
             )
         }
@@ -193,13 +211,13 @@ function Checkout() {
     }
 
     const AddressAlert = () => {
-        if (address) {
+        if (addressAlert) {
             return (
                 <Alert status="error" mb={3}>
                     <AlertIcon />
                     <AlertTitle mr={2}></AlertTitle>
                     <AlertDescription>Invalid Address</AlertDescription>
-                    <CloseButton position="absolute" onClick={() => setAddress(false)} right="6px" top="8px"/>
+                    <CloseButton position="absolute" onClick={() => setAddressAlert(false)} right="6px" top="8px"/>
                 </Alert>
             )
         }
@@ -211,13 +229,13 @@ function Checkout() {
     }
 
     const FirstNameAlert = () => {
-        if (firstName) {
+        if (firstNameAlert) {
             return (
                 <Alert status="error" mb={3}>
                     <AlertIcon />
                     <AlertTitle mr={2}></AlertTitle>
                     <AlertDescription>Invalid String</AlertDescription>
-                    <CloseButton position="absolute" onClick={() => setFirstName(false)} right="6px" top="8px"/>
+                    <CloseButton position="absolute" onClick={() => setFirstNameAlert(false)} right="6px" top="8px"/>
                 </Alert>
             )
         }
@@ -229,13 +247,13 @@ function Checkout() {
     }
 
     const EmailAlert = () => {
-        if (email) {
+        if (emailAlert) {
             return (
                 <Alert status="error" mb={3}>
                     <AlertIcon />
                     <AlertTitle mr={2}></AlertTitle>
                     <AlertDescription>Invalid Email</AlertDescription>
-                    <CloseButton position="absolute" onClick={() => setEmail(false)} right="6px" top="8px"/>
+                    <CloseButton position="absolute" onClick={() => setEmailAlert(false)} right="6px" top="8px"/>
                 </Alert>
             )
         }
@@ -248,13 +266,13 @@ function Checkout() {
 
     
     const LastNameAlert = () => {
-        if (lastName) {
+        if (lastNameAlert) {
             return (
                 <Alert status="error" mb={3}>
                     <AlertIcon />
                     <AlertTitle mr={2}></AlertTitle>
                     <AlertDescription>Invalid String</AlertDescription>
-                    <CloseButton position="absolute" onClick={() => setLastName(false)} right="6px" top="8px"/>
+                    <CloseButton position="absolute" onClick={() => setLastNameAlert(false)} right="6px" top="8px"/>
                 </Alert>
             )
         }
@@ -268,27 +286,27 @@ function Checkout() {
 
     function stats() {
         return (
-            <Flex mt={4} mr={4} backgroundColor="gray.700" width="100%" alignItems="center" justifyContent="center">
-                <Flex p={12} direction="column" background="gray.400" rounded={6} width="80%" height="60%">
+            <Flex mt={4} mr={4} backgroundColor="gray.700" width="100%" justifyContent="center">
+                <Flex p={12} mt={4} direction="column" background="gray.400" rounded={6} width="80%" height="85%">
                     <Heading textAlign="center" mb={6}>Checkout</Heading> 
                     <FirstNameAlert/>
                     <Input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="First Name" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
                     <LastNameAlert/>
-                    <Input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Last Name" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
+                    <Input mt={3}  type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Last Name" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
                     <EmailAlert/>
-                    <Input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
+                    <Input mt={3}  type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
                     <AddressAlert/>
-                    <Input type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Address" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
+                    <Input mt={3}  type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Address" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
                     <CityAlert/>
-                    <Input type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="City" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
+                    <Input mt={3} type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="City" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
                     <StateAlert/>
-                    <Input type="text" value={state} onChange={(e) => setState(e.target.value)} placeholder="State" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
+                    <Input mt={3} type="text" value={state} onChange={(e) => setState(e.target.value)} placeholder="State" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
                     <ZipcodeAlert/>
-                    <Input type="number" value={zipcode} onChange={(e) => setZipcode(e.target.value)} placeholder="Zip" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
+                    <Input mt={3} type="number" value={zipcode} onChange={(e) => setZipcode(e.target.value)} placeholder="Zip" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
                     <CardNumberAlert/>
-                    <Input type="number" value={cardNumber} onChange={(e) => setCardnumber(e.target.value)} placeholder="Card Number" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
+                    <Input mt={3} type="number" value={cardNumber} onChange={(e) => setCardnumber(e.target.value)} placeholder="Card Number" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
                     <CVVAlert/>
-                    <Input type="number" value={cvv} onChange={(e) => setCVV(e.target.value)} placeholder="CVV" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
+                    <Input mt={3} type="number" value={cvv} onChange={(e) => setCVV(e.target.value)} placeholder="CVV" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
                     <Button mb={6} size="md" colorScheme="red" onClick={handleSubmit}>Pay</Button>
                 </Flex>
             </Flex>

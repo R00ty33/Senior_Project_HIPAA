@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -33,6 +34,7 @@ public class CartService {
             Inventory inventory = inventoryService.getProductByName(product_name);
             cart.getInventory().add(inventory);
             inventory.getCart().add(cart);
+            System.out.println("\n\n\n\n\n\n" + inventory.getCart().toString() + "\n" + cart.getInventory().toString() + "\n\n\n\n\n\n");
             cartRepository.save(cart);
         }
     }
@@ -51,9 +53,9 @@ public class CartService {
         }
     }
 
-    public Set<Inventory> getCart(String cookie) {
+    public Collection<Inventory> getCart(String cookie) {
         Cart cart = cartRepository.getCartInventoryIds(cookie);
-        Set<Inventory> cartInventory = cart.getInventory();
+        Collection<Inventory> cartInventory = cart.getInventory();
         return cartInventory;
     }
 }
