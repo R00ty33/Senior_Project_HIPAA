@@ -29,6 +29,7 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.util.Assert;
 
@@ -81,6 +82,18 @@ import javax.servlet.http.HttpServletResponse;
  * @see DefaultHttpFirewall
  */
 public class StrictHttpFirewall implements HttpFirewall {
+
+    @Bean
+    public StrictHttpFirewall httpFirewall() {
+        StrictHttpFirewall firewall = new StrictHttpFirewall();
+        firewall.setAllowedHttpMethods(Arrays.asList("GET", "POST"));
+        firewall.setAllowSemicolon(true);
+        firewall.setAllowUrlEncodedSlash(true);
+        firewall.setAllowBackSlash(true);
+        firewall.setAllowUrlEncodedPercent(true);
+        firewall.setAllowUrlEncodedPeriod(true);
+        return firewall;
+    }
 
     /**
      * Used to specify to {@link #setAllowedHttpMethods(Collection)} that any HTTP method
