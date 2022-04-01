@@ -35,6 +35,14 @@ public class User {
     public User() {
     }
 
+    public User(String first_name, String last_name, String email, Role role, UserCredentials userCredentials) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.email = email;
+        this.role = role;
+        this.userCredentials = userCredentials;
+    }
+
     public User(String first_name, String last_name, String email, Date date_joined) {
         this.first_name = first_name;
         this.last_name = last_name;

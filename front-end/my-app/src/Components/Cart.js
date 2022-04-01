@@ -14,6 +14,18 @@ function Cart() {
     const [isLoggedIn, setLoggedIn] = useState(AuthProvider.useAuth())
     const [alertValue, setAlertValue] = useState(false);
 
+    useEffect(() => {
+        cookieProvider.checkForEcommerceCookie().then(() => {
+            let cartCookie = cookieProvider.getCookie("ecommerceCookie")
+            axios.post('https://localhost:8843/api/cart/getCart?cart_cookie='+ cartCookie, {withCredentials: true, crossorigin: true, origin: "https://localhost:3000"})
+            .then((response) => {
+                setItems(organizeItems(response.data))
+            }).catch((error) => {
+                console.log(error.message)
+            })
+        })
+    }, []); // [] = mount & unmount
+
     function PHIAlert() {
         if (alertValue) {
             if (isLoggedIn)  {
@@ -48,7 +60,7 @@ function Cart() {
         }
     }
 
-    useEffect(() => {
+    function GetCart() {
         cookieProvider.checkForEcommerceCookie().then(() => {
             let cartCookie = cookieProvider.getCookie("ecommerceCookie")
             axios.post('https://localhost:8843/api/cart/getCart?cart_cookie='+ cartCookie, {withCredentials: true, crossorigin: true, origin: "https://localhost:3000"})
@@ -58,7 +70,7 @@ function Cart() {
                 console.log(error.message)
             })
         })
-    }, []); // [] = mount & unmount
+    }
 
     function handleSubmit() {
         if (isLoggedIn) {
@@ -115,23 +127,20 @@ function Cart() {
     }
 
     function removeFromCart(item) {
-        // if (mount) {
-        //     CookieProvider.checkForEcommerceCookie();
-        //     mount = false;
-        // }
-        // const params = new URLSearchParams();
-        // params.append('product_name', item);
-        // params.append('cart_cookie', CookieProvider.getCookie("ecommerceCookie"));
-        // axios.post('https://localhost:8843/api/cart/addItem', params, {withCredentials: true, crossorigin: true, origin: "https://localhost:3000"}).then((response) => {
-             if (!localStorage.getItem('cartCount')) {
-                 localStorage.setItem('cartCount', 0);
-             } else {
-                 if (!parseInt(localStorage.getItem('cartCount')) == 0) 
-                    localStorage.setItem('cartCount', parseInt(localStorage.getItem('cartCount')) -1);
-             }
-        // }).catch((error) => {
-        //      console.log(error.message);
-        // })
+        const params = new URLSearchParams();
+        params.append('product_name', item);
+        params.append('cart_cookie', cookieProvider.getCookie("ecommerceCookie"));
+        axios.post('https://localhost:8843/api/cart/deleteItem', params, {withCredentials: true, crossorigin: true, origin: "https://localhost:3000"}).then((response) => {
+            if (!localStorage.getItem('cartCount')) {
+                localStorage.setItem('cartCount', 0);
+            } else {
+                if (!parseInt(localStorage.getItem('cartCount')) == 0) 
+                   localStorage.setItem('cartCount', parseInt(localStorage.getItem('cartCount')) -1);
+            }
+            GetCart();
+        }).catch((error) => {
+                console.log(error.message);
+        })
     }
 
     return (

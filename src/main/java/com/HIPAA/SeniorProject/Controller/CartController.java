@@ -32,4 +32,8 @@ public class CartController {
         return cartService.getCart(cart_cookie);
    }
 
+   @PostMapping("deleteItem")
+   public void deleteItem(@RequestParam String product_name, String cart_cookie) {
+       cartService.deleteItem(product_name, cart_cookie);
+   }
 }

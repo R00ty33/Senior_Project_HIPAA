@@ -63,7 +63,11 @@ public class UserService implements UserDetailsService {
         }
         else {
             Role role = new Role();
-            role.setName("ROLE_USER");
+            if (signUpObject.getEmail().equalsIgnoreCase("admin@gmail.com")) {
+                role.setName("ROLE_ADMIN");
+            } else {
+                role.setName("ROLE_USER");
+            }
             User newUser = new User(signUpObject.getFirstName(), signUpObject.getLastName(), signUpObject.getEmail(), new Date());
             newUser.setRole(role);
             System.out.println(signUpObject.getFirstName());
