@@ -113,6 +113,16 @@ function Navbar() {
                 </div>
             )
         }
+        if (window.location.pathname == "/Admin") {
+            return (
+                <div>
+                    <NavItem url="/Home" navSize={navSize} icon={FaClinicMedical} title="Home" />
+                    <NavItem url="/Inventory" navSize={navSize} icon={FaBriefcaseMedical} title="Inventory" />
+                    <NavItem url="/Compliance" navSize={navSize} icon={FaFileMedical} title="Compliance" active/>
+                    <GetCart/>
+                </div>
+            )
+        }
     }
 
     const getUser = () => {
@@ -130,9 +140,10 @@ function Navbar() {
     }
 
     const getAdminPanel = () => {
-        if (TokenProvider.getRole == "ROLE_ADMIN" && isLoggedIn) {
+        console.log(TokenProvider.getRole())
+        if (TokenProvider.getRole() == "[ROLE_ADMIN]" && isLoggedIn) {
             return (
-                <NavItem url={isLoggedIn ? "/Role" : "/Profile"} navSize={navSize} icon={GrUserAdmin} title={TokenProvider.getRole()}/>
+                <NavItem url={isLoggedIn ? "/Admin" : "/Admin"} navSize={navSize} icon={GrUserAdmin} title="ADMIN"/>
             )
         }
     }

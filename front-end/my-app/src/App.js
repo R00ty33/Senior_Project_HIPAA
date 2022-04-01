@@ -15,6 +15,7 @@ import Orders from "./Components/Orders.js";
 import authProvider from "./Components/AuthProvider.js";
 import SuccessPage from "./Components/SuccessPage.js";
 import Compliance from "./Components/Compliance.js";
+import AdminPage from "./Components/AdminPage.js";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(authProvider.useAuth())  
@@ -34,6 +35,7 @@ function App() {
           <Route exact path='/Checkout' element={<PrivateRoute><Checkout/></PrivateRoute>}/>
           <Route exact path='/Orders' element={<PrivateRoute><Orders/></PrivateRoute>}/>
           <Route exact path='/Success' element={<PrivateRoute><SuccessPage/></PrivateRoute>}/>
+          <Route exact path='/Admin' element={<PrivateRoute><AdminPage/></PrivateRoute>}/>
           <Route path='/' element={<HomePage/>}/>
         </Routes>
       </BrowserRouter>
