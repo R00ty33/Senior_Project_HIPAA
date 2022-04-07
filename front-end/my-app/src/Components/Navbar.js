@@ -140,10 +140,22 @@ function Navbar() {
     }
 
     const getAdminPanel = () => {
-        console.log(TokenProvider.getRole())
-        if (TokenProvider.getRole() == "[ROLE_ADMIN]" && isLoggedIn) {
+        if (isLoggedIn) {
+            if (TokenProvider.getRole() == "[ROLE_ADMIN]") {
+                return (
+                    <NavItem url={isLoggedIn ? "/Admin" : "/Admin"} navSize={navSize} icon={GrUserAdmin} title="ADMIN"/>
+                )
+            } else {
+                return (
+                    <>
+                    </>
+                )
+            }
+        }
+        else {
             return (
-                <NavItem url={isLoggedIn ? "/Admin" : "/Admin"} navSize={navSize} icon={GrUserAdmin} title="ADMIN"/>
+                <>
+                </>
             )
         }
     }
