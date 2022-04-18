@@ -24,6 +24,7 @@ function Checkout() {
     const [zipcode, setZipcode] = useState('');
     const [cardNumber, setCardnumber] = useState('');
     const [cvv, setCVV] = useState('');
+    const [expiryDate, setDate] = useState('');
     const [firstNameAlert, setFirstNameAlert] = useState('');
     const [lastNameAlert, setLastNameAlert] = useState('');
     const [emailAlert, setEmailAlert] = useState('');
@@ -33,9 +34,11 @@ function Checkout() {
     const [zipcodeAlert, setZipcodeAlert] = useState('');
     const [cardNumberAlert, setCardnumberAlert] = useState('');
     const [cvvAlert, setCVVAlert] = useState('');
+    const [expiryDateAlert, setDateAlert] = useState('');
     const [orderHash, setOrderHash] = useState('');
     const [confetti, setConfetti] = useState(false);
     var valid = require("card-validator");
+}
 
 
     function handleSubmit() {
@@ -54,6 +57,7 @@ function Checkout() {
             params.append('zipcode', zipcode)
             params.append('cardNumber', cardNumber)
             params.append('csv', cvv)
+            params.append('expiryDate', expiryDate)
             params.append('ecommerceCookie', cookieProvider.getCookie("ecommerceCookie"))
             axios.post('https://localhost:8843/api/order/checkout', params, {withCredentials: true, crossorigin: true, origin: "https://localhost:3000"})
             .then((response) => {
@@ -117,7 +121,30 @@ function Checkout() {
             setCVVAlert(true)
             result = false;
         }
+        if (expiryDate != '' && expiryDate != null && expiryDate != new RegExp('^[0-9]*$') && valid.date(expiryDate).isValid) {
+            setExpiryDateAlert(false);
+        } else {
+            setExpiryDateAlert(true)
+            result = false;
         return result;
+    }
+
+    const ExpiryDateAlert = () => {
+        if (cvvAlert) {
+            return (
+                <Alert status="error" mb={3}>
+                    <AlertIcon />
+                    <AlertTitle mr={2}></AlertTitle>
+                    <AlertDescription>Invalid CVV</AlertDescription>
+                    <CloseButton position="absolute" onClick={() => setExpiryDateAlert(false)} right="6px" top="8px"/>
+                </Alert>
+            )
+        }
+        else {
+            return (
+                <div></div>
+            )
+        }
     }
 
     const CVVAlert = () => {
@@ -307,6 +334,8 @@ function Checkout() {
                     <Input mt={3} type="number" value={cardNumber} onChange={(e) => setCardnumber(e.target.value)} placeholder="Card Number" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
                     <CVVAlert/>
                     <Input mt={3} type="number" value={cvv} onChange={(e) => setCVV(e.target.value)} placeholder="CVV" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
+                    <ExpiryDateAlert/>
+                    <Input mt={3} type="date" value={cvv} onChange={(e) => setDate(e.target.value)} placeholder="Exp.Date" variant="" mb={3} isInvalid errorBorderColor="gray.400"></Input>
                     <Button mb={6} size="md" colorScheme="red" onClick={handleSubmit}>Pay</Button>
                 </Flex>
             </Flex>
