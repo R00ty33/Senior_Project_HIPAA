@@ -31,4 +31,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("UPDATE UserCredentials s SET s.creditCardNO = ?1, s.salt = ?2 WHERE s.user = ?3")
     Integer updateUserCreditCardNo(String creditCardNo, String salt, User user);
 
+    @Modifying
+    @Query("UPDATE UserCredentials s SET s.expiryDate = ?1 WHERE s.user = ?2")
+    Integer updateUserExpiryDate(String expiryDate, User user);
 }

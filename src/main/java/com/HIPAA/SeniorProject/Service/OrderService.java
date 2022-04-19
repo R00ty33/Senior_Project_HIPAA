@@ -52,6 +52,7 @@ public class OrderService {
         TextEncryptor encryptor = Encryptors.text(password, salt);
         System.out.println("Salt: \"" + salt + "\"");
         userRepository.updateUserCreditCardNo(encryptor.encrypt(cardNumber), salt, user);
+        userRepository.updateUserExpiryDate(date, user);
         log.info("Checkout Finished:");
         return theMD5digest.toString();
     }
