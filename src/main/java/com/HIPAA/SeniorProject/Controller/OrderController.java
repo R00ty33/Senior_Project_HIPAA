@@ -19,8 +19,8 @@ public class OrderController {
 
     @PostMapping("/checkout")
     public String checkout(String jwt, String firstName, String lastName, String email, String address,
-                         String city, String state, Integer zipcode, String cardNumber, Integer csv, String ecommerceCookie) throws Exception {
-        return orderService.checkout(jwt, firstName, lastName, email, address, city, state, zipcode, cardNumber, csv, ecommerceCookie);
+                         String city, String state, Integer zipcode, String cardNumber, Integer csv, String date, String ecommerceCookie) throws Exception {
+        return orderService.checkout(jwt, firstName, lastName, email, address, city, state, zipcode, cardNumber, csv, date, ecommerceCookie);
     }
 
     @GetMapping("/orders")

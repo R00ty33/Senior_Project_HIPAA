@@ -34,7 +34,7 @@ public class OrderService {
     private final InventoryService inventoryService;
 
     public String checkout(String jwt, String firstName, String lastName, String email, String address,
-                         String city, String state, Integer zipcode, String cardNumber, Integer csv, String ecommerceCookie) throws Exception {
+                         String city, String state, Integer zipcode, String cardNumber, Integer csv, String date, String ecommerceCookie) throws Exception {
         log.info("Checkout processing:");
         String userEmail = userService.authorizationByJWT(jwt);
         String body = jwt + lastName + email + ecommerceCookie;
