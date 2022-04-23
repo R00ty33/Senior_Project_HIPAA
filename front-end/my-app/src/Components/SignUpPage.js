@@ -94,7 +94,15 @@ function SignUpPage() {
     /** check if password is valid */
     const validatePassword = (password) => {
         var schema = new passwordValidator();
-        schema.is().min(7).has().uppercase().has().lowercase().has().digits(1).has().not().spaces()
+        schema
+        .is().min(8)                                        // Minimum Length of 8 characters
+        .has().uppercase()                                  // Must contain uppercase letters
+        .has().lowercase()                                  // Must contain lowercase letters
+        .has().digits(1)                                    // Must contain at least 1 digit
+        .has().not().spaces()                               // Can not have spaces 
+        .has().symbols(1)                                   // Must use a special character
+        .is().not().oneOf(['Passw0rd@', 'Password123@'])    // Blacklists the use of the word "password"
+
         if(!schema.validate(password)) {
             setPasswordInvalidAlert(true);
             return false;
